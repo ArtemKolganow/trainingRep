@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="770b7715-4928-49a6-9048-c39ac990841d" name="Default Changelist" comment="" />
+    <list default="true" id="770b7715-4928-49a6-9048-c39ac990841d" name="Default Changelist" comment="Рефакторинг 4 заданий первого таска. &#10;Пробный коммит из IDE.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/training/task1/ex1/Milk.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/training/task1/ex2/MultiplyOfFourNumbers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/training/task1/ex3/QuadraticEquation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/training/task1/ex4/DigitsFromDouble.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/META-INF/task1.kotlin_module" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/by/training/task1/Runner/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/by/training/task1/ex1/Milk.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/by/training/task1/ex2/MultiplyOfFourNumbers.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/by/training/task1/ex3/QuadraticEquation.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/by/training/task1/ex4/DigitsFromDouble.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/training/task1/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/training/task1/Runner/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/by/training/task1/Main.class" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +33,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -27,7 +44,9 @@
     </option>
   </component>
   <component name="ProjectId" id="1Upmm16bRoSQ9ozkRPpV9Ld4pTQ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SONARLINT_PRECOMMIT_ANALYSIS" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -50,11 +69,11 @@
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="by.training.task1.Main" />
+      <option name="MAIN_CLASS_NAME" value="by.training.task1.Runner.Main" />
       <module name="task1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="by.training.task1.*" />
+          <option name="PATTERN" value="by.training.task1.Runner.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -82,10 +101,26 @@
       <workItem from="1576076559892" duration="673000" />
       <workItem from="1576086112625" duration="3575000" />
       <workItem from="1576164710199" duration="1331000" />
+      <workItem from="1576255398703" duration="2409000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Рефакторинг 4 заданий первого таска. &#10;Пробный коммит из IDE." />
+    <option name="LAST_COMMIT_MESSAGE" value="Рефакторинг 4 заданий первого таска. &#10;Пробный коммит из IDE." />
   </component>
 </project>
