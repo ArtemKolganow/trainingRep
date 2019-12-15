@@ -21,8 +21,9 @@ public class Main {
                Date now = new Date(day,month,year);
                Date next = validation.nextDate(now);
                 System.out.println("Next date :" + next.toString());
-            }catch (Exception ignored){}
-
+            }catch (IllegalArgumentException e){
+                e.printStackTrace();
+            }
             System.out.println("0 to exit");
             if(scanner.next().equals("0"))
             {

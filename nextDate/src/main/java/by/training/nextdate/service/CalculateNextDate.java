@@ -8,24 +8,19 @@ public class CalculateNextDate extends Date {
         super(day, month, year);
     }
 
-    public void nextDate(int type)
+    public void nextDay()
     {
-        switch (type) {
-            case 1: {
-                setDay(getDay()+1);
-                break;
-            }
-            case 2: {
-                setDay(1);
-                setMonth(getMonth()+1);
-                break;
-            }
-            case 3: {
-                setDay(1);
-                setMonth(1);
-                setYear(getYear()+1);
-                break;
-            }
-        }
+        setDay(getDay()+1);
+    }
+
+    public void nextMonth(){
+        setDay(1);
+        setMonth(getMonth()+1);
+    }
+
+    public void nextYear() {
+        setDay(1);
+        setMonth(1);
+        setYear(getYear() + 1);
     }
 }
