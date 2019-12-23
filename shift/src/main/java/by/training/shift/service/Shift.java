@@ -8,8 +8,10 @@ public class Shift {
             throw new IllegalArgumentException("");
         }else {
             int temp = arr.get(index);
-            arr.remove(index);
-            arr.add(index + dist, temp);
+            for(int i =index; i<index+dist;i++ ) {
+                arr.set(i,arr.get(i+1));
+            }
+            arr.set(index+dist,temp);
         }
     }
 
