@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="770b7715-4928-49a6-9048-c39ac990841d" name="Default Changelist" comment="" />
+    <list default="true" id="770b7715-4928-49a6-9048-c39ac990841d" name="Default Changelist" comment="Рефакторинг 4 заданий первого таска. &#10;Пробный коммит из IDE.">
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/b/ebc72bfbfe2c9d2e5f5e4b3e3de8c716c5355b03" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +39,7 @@
     <property name="SONARLINT_PRECOMMIT_ANALYSIS" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../task2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -88,6 +92,7 @@
       <workItem from="1576086112625" duration="3575000" />
       <workItem from="1576164710199" duration="1331000" />
       <workItem from="1576255398703" duration="3151000" />
+      <workItem from="1576663926187" duration="214000" />
     </task>
     <task id="LOCAL-00001" summary="Рефакторинг 4 заданий первого таска. &#10;Пробный коммит из IDE.">
       <created>1576257847308</created>
@@ -107,7 +112,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

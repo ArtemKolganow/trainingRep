@@ -9,7 +9,7 @@ public class BinaryInsertSort implements Sort {
             Integer tmp = arr.get(i);
             Integer left = 0;
             Integer right = i;
-            Integer border = i;
+            Integer border ;
             // Ищем позицию для элемента на  i позиции.
             while (left < right) {
                 border = (left + right) / 2;
