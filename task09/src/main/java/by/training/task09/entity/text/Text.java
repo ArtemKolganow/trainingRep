@@ -1,4 +1,4 @@
-package by.training.task09.entity;
+package by.training.task09.entity.text;
 
 import java.util.ArrayList;
 import java.util.Objects;

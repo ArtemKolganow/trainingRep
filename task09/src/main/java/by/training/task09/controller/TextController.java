@@ -1,18 +1,19 @@
 package by.training.task09.controller;
 
-import by.training.task09.entity.Text;
+import by.training.task09.entity.text.Text;
 import by.training.task09.serice.TextService;
 import by.training.task09.view.InputException;
-import by.training.task09.view.View;
+import by.training.task09.view.TextView;
 
 public class TextController {
-    public void exerciseOne(View view){
+    public void exerciseOne(){
+        TextView view= new TextView();
         TextService service = new TextService();
         boolean exit = false;
         Text text= new Text(view.readString("Введите заголовок текста: "));
         while (!exit){
             try {
-                view.showMenuOne();
+                view.showMenu();
                 switch (view.readInt("Выберите пункт: ")){
                     case 0: {
                         exit = true;
@@ -37,7 +38,7 @@ public class TextController {
                     }
                 }
             } catch (InputException e) {
-                e.printStackTrace();
+                view.showMassage(e.getMessage());
             }
         }
     }

@@ -1,6 +1,5 @@
 package by.training.task09.controller;
 
-import by.training.task09.serice.TextService;
 import by.training.task09.view.InputException;
 import by.training.task09.view.View;
 
@@ -19,11 +18,12 @@ public class Runner {
                     }
                     case 1:{
                         TextController controller = new TextController();
-                        controller.exerciseOne(view);
+                        controller.exerciseOne();
                         break;
                     }
                     case 2:{
-                        view.showMassage("Задаине 2 не готово. Извините.");
+                        BankController controller = new BankController();
+                        controller.exerciseTwo();
                         break;
                     }
                     default:{
@@ -31,7 +31,7 @@ public class Runner {
                     }
                 }
             } catch (InputException e) {
-                e.printStackTrace();
+                view.showMassage(e.getMessage());
             }
         }
     }
