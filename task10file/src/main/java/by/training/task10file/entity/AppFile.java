@@ -1,17 +1,17 @@
-package by.training.task10file.data;
+package by.training.task10file.entity;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-public class File {
+public class AppFile {
     Directory directory;
     String name;
     private java.io.File file;
 
-    File() {
+    AppFile() {
     }
 
-    public File(String directory, String name) {
+    public AppFile(String directory, String name) {
         this.directory = new Directory(directory);
         this.name = name;
         file = new java.io.File(this.directory.getPath(),this.name);
@@ -61,10 +61,10 @@ public class File {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        File file1 = (File) o;
-        return Objects.equals(directory, file1.directory) &&
-                Objects.equals(name, file1.name) &&
-                Objects.equals(file, file1.file);
+        AppFile appFile1 = (AppFile) o;
+        return Objects.equals(directory, appFile1.directory) &&
+                Objects.equals(name, appFile1.name) &&
+                Objects.equals(file, appFile1.file);
     }
 
     @Override

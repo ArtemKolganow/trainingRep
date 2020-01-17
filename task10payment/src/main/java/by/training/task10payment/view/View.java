@@ -1,19 +1,17 @@
-package by.training.task10file.view;
+package by.training.task10payment.view;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class View {
     public void showMenu(){
         System.out.println("Выберите действие:");
-        System.out.println("1- задать директорию");
-        System.out.println("2- задать имя файла");
-        System.out.println("3- создать файл");
-        System.out.println("4- переименовать файл");
-        System.out.println("5- показать содержимое файла");
-        System.out.println("6- дополнить файл");
-        System.out.println("7- удалить файл");
-        System.out.println("0- Выход");
+        System.out.println("add name quantity  --  добавить товар к покупке");
+        System.out.println("delete index  --  удалить товар из покупки");
+        System.out.println("show  --  просмотр списка товаров");
+        System.out.println("view  --  просмотр корзины");
+        System.out.println("create name price weight  --  добавить новый товар в список");
+        System.out.println("change newPath  --  изменить путь к файлу с товарами");
+        System.out.println("exit  --  Выход");
     }
 
 
@@ -42,26 +40,12 @@ public class View {
 
     public String readString(){
         Scanner scanner = new Scanner(System.in);
-        return scanner.next();
+        return scanner.nextLine();
     }
 
     public String readString(String massage){
         System.out.print(massage);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
-    }
-
-    public void showList(List<String> list){
-        for (String i:list){
-            System.out.println(i);
-        }
-    }
-
-    public void showBool(boolean bool){
-        if(bool){
-            System.out.println("Действие завершено успешно.");
-        }else {
-            System.out.println("Действие не выполнено.");
-        }
     }
 }

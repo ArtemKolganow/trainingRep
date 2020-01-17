@@ -1,4 +1,4 @@
-package by.training.task10file.data;
+package by.training.task10file.entity;
 
 import java.util.Objects;
 
