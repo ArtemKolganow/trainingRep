@@ -3,6 +3,7 @@ package by.training.task10treasures.controller.command;
 import by.training.task10treasures.controller.RequestCreator;
 import by.training.task10treasures.entity.Backpack;
 import by.training.task10treasures.entity.Treasure;
+import by.training.task10treasures.service.ServiceException;
 import by.training.task10treasures.service.TreasureService;
 
 import java.io.IOException;
@@ -26,8 +27,8 @@ public class AddToBackpack implements Command {
             }else{
                 return "Такого сокровища нет." +Command.DELIMITER+ req[1];
             }
-        } catch (IOException e) {
-            return "Ошибка файла." + Command.DELIMITER + req[1];
+        } catch (ServiceException e) {
+            return e.getMessage() + Command.DELIMITER + req[1];
         }
 
     }

@@ -1,9 +1,8 @@
 package by.training.task10treasures.controller.command;
 
+import by.training.task10treasures.service.ServiceException;
 import by.training.task10treasures.service.TreasureService;
 import by.training.task10treasures.view.View;
-
-import java.io.IOException;
 
 public class ShowMaxPrice implements Command {
     @Override
@@ -13,8 +12,8 @@ public class ShowMaxPrice implements Command {
         View view = new View();
         try {
             view.showMessage(service.findHighestPrice().toString());
-        } catch (IOException e) {
-            return "Ошибка при чтении файла." + Command.DELIMITER + req[1];
+        } catch (ServiceException e) {
+            return e.getMessage() + Command.DELIMITER + req[1];
         }
         return " " + Command.DELIMITER + req[1];
     }

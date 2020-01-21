@@ -3,9 +3,7 @@ package by.training.task10treasures.controller.command;
 import by.training.task10treasures.controller.RequestCreator;
 import by.training.task10treasures.entity.Backpack;
 import by.training.task10treasures.entity.Treasure;
-import by.training.task10treasures.service.TreasureService;
 
-import java.util.List;
 import java.util.Set;
 
 public class DeleteFromBackpack implements Command {
