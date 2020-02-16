@@ -12,8 +12,7 @@ public class SortSentenceRequest implements Command {
         String[] param = request.split(" ");
         SortService service = new SortService();
         try {
-            service.sortSentence((Composite) component, Integer.parseInt(param[0]), Integer.parseInt(param[1]));
-            response = "Сортировка завершена.";
+            response = service.sortSentence((Composite) component, Integer.parseInt(param[0]), Integer.parseInt(param[1]));
         } catch (ServiceException e) {
             response = e.getMessage();
         }

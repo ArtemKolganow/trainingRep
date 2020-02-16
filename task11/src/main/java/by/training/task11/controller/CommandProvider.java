@@ -18,6 +18,7 @@ class CommandProvider {
         repository.put(CommandName.READ,new ReadRequest());
         repository.put(CommandName.SORT_PARAGRAPH,new SortParagraphRequest());
         repository.put(CommandName.SORT_SENTENCE,new SortSentenceRequest());
+        repository.put(CommandName.SORT_LEXEME,new SortLexemeRequest());
     }
 
     Command getCommand(String name){

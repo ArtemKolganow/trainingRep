@@ -14,15 +14,19 @@ public class Composite implements Component {
         return null;
     }
 
-    public void setChildren(List<Component> children) {
-        this.children = children;
+    public void setChild(int i, Component component){
+        children.set(i,component);
     }
 
     public void add(Component child){
         this.children.add(child);
     }
 
-    public List<Component> getChildren() {
-        return children;
+    public Component getChild(int i){
+        return children.get(i);
+    }
+
+    public int getChildrenSize(){
+        return children.size();
     }
 }

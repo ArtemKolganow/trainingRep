@@ -11,16 +11,20 @@ import java.util.regex.Pattern;
 
 public class ParseToSentence implements Parser {
     private static final String REG = "[^.?!]+[.?!]+";
+    private Parser next;
+
+    public ParseToSentence(Parser next) {
+        this.next = next;
+    }
+
     @Override
-    public void parse(Composite composite, String string, List<Parser> parsers, int index) {
-        Parser parser = parsers.get(index);
-        index++;
+    public void parse(Composite composite, String string) {
         Pattern pattern = Pattern.compile(REG);
         Matcher matcher = pattern.matcher(string);
         while(matcher.find()){
             String sentenceString = string.substring(matcher.start(),matcher.end());
             Sentence sentence = new Sentence();
-            parser.parse(sentence,sentenceString,parsers,index);
+            next.parse(sentence,sentenceString);
             composite.add(sentence);
         }
 

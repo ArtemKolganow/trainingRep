@@ -5,11 +5,7 @@ import by.training.task11.dal.DataReader;
 import by.training.task11.dal.Reader;
 import by.training.task11.entity.Component;
 import by.training.task11.entity.Composite;
-import by.training.task11.entity.Text;
 import by.training.task11.service.parser.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Service {
 
@@ -21,18 +17,15 @@ public class Service {
         } catch (DataException e) {
             throw new ServiceException(e);
         }
-        int index =0;
-        List<Parser> parserList = formListOfParser();
-        parserList.get(index++).parse((Composite) text,textString,parserList,index);
+        Parser parser = formChainOfParser();
+       parser.parse((Composite) text, textString);
     }
 
-    private List<Parser> formListOfParser(){
-        List<Parser> parserList = new ArrayList<>();
-        parserList.add(new ParseToParagraph());
-        parserList.add(new ParseToSentence());
-        parserList.add(new ParseToLexeme());
-        parserList.add(new ParseToWord());
-        parserList.add(new ParseToCharacter());
-        return parserList;
+    public Parser formChainOfParser(){
+        Parser toChar = new ParseToCharacter();
+        Parser toWord = new ParseToWord(toChar);
+        Parser toLexeme = new ParseToLexeme(toWord);
+        Parser toSentence = new ParseToSentence(toLexeme);
+        return new ParseToParagraph(toSentence);
     }
 }
