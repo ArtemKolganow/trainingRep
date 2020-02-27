@@ -1,9 +1,9 @@
 package by.training.task12.view;
 
 import by.training.task12.entity.Matrix;
+import by.training.task12.entity.MatrixLock;
 import by.training.task12.entity.MatrixException;
 
-import java.security.spec.RSAOtherPrimeInfo;
 import java.util.Scanner;
 
 public class View implements Show {
@@ -48,8 +48,8 @@ public class View implements Show {
     }
 
     public void showMatrix(Matrix matrix){
-        for(int i = 0; i< matrix.getLength();i++){
-            for(int j =0; j< matrix.getLength();j++){
+        for(int i = 0; i< matrix.getLength(); i++){
+            for(int j = 0; j< matrix.getLength(); j++){
                 try {
                     System.out.print(matrix.get(i,j) + " ");
                 } catch (MatrixException e) {
