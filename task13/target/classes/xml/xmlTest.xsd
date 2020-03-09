@@ -1,0 +1,77 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.training.by/xmlTest"
+        xmlns:tns="http://www.training.by/xmlTest"
+        elementFormDefault="qualified">
+    <element name="users">
+        <complexType>
+            <sequence>
+                <element name="user"
+                         type="tns:User"
+                         minOccurs="1"
+                         maxOccurs="unbounded" />
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="User">
+        <sequence>
+            <element name="login" type="string" />
+            <element name="pass" type="string" />
+            <element name="email" type="string" />
+            <element name="userInfo" type="tns:UserInfo" />
+            <element name="order" type="tns:Order" minOccurs="0"
+                     maxOccurs="unbounded"/>
+        </sequence>
+        <attribute name="id" type="int"  use="required" />
+        <attribute name="role" type="int"  use="required" >
+            <simpleType>
+                <restriction base="int">
+                    <enumeration value="0"/>
+                    <enumeration value="1"/>
+                    <enumeration value="2"/>
+                </restriction>
+            </simpleType>
+        </attribute>
+    </complexType>
+    <complexType name="UserInfo">
+        <sequence>
+            <element name="name" type="string" />
+            <element name="surname" type="string" />
+            <element name="phoneNumber" type="string" minOccurs="9"
+                     maxOccurs="9" />
+        </sequence>
+    </complexType>
+    <complexType name="Order">
+        <sequence>
+            <element name="date" type="date" />
+            <element name="deliviredate" type="date"/>
+            <element name="price" type="string" />
+            <element name="productlist" type="tns:ProductList" />
+        </sequence>
+        <attribute name="id" type="int"  use="required" />
+        <attribute name="status" type="string"  use="required">
+            <simpleType>
+                <restriction base="string">
+                    <enumeration value="compilation"/>
+                    <enumeration value="confirmed"/>
+                    <enumeration value="assembled"/>
+                    <enumeration value="delivered"/>
+                </restriction>
+            </simpleType>
+        </attribute>
+
+    </complexType>
+    <complexType name="ProductList">
+        <sequence>
+            <element name="product" type="tns:Product" minOccurs="1"
+                     maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="Product">
+        <sequence>
+            <element name="product_id" type="int"/>
+            <element name="quantity" type="int"/>
+        </sequence>
+    </complexType>
+</schema>

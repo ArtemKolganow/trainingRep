@@ -1,0 +1,82 @@
+<?xml version ="1.0" encoding = "UTF-8"?>
+<users xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://www.training.by/xmlTest"
+          xsi:schemaLocation="http://www.training.by/xmlTest xmlTest.xsd">
+    <user id="1" role ="2">
+        <login>admin</login>
+        <pass>123456</pass>
+        <email>admin@gmail.com</email>
+        <userInfo>
+            <name>Артем</name>
+            <surname>Колганов</surname>
+            <phoneNumber>291111111</phoneNumber>
+        </userInfo>
+        <order id="1" status="compilation">
+            <date>01.02.2020</date>
+            <deliviredate>05.03.2020</deliviredate>
+            <price>30.5</price>
+            <productlist>
+                <product>
+                    <product_id>1</product_id>
+                    <quantity>3</quantity>
+                </product>
+                <product>
+                    <product_id>2</product_id>
+                    <quantity>5</quantity>
+                </product>
+            </productlist>
+        </order>
+    </user>
+
+    <user id="2" role ="1">
+        <login>ant</login>
+        <pass>222333</pass>
+        <email>ant_is_good@gmail.com</email>
+        <userInfo>
+            <name>Василий</name>
+            <surname>Муравьев</surname>
+            <phoneNumber>292222222</phoneNumber>
+        </userInfo>
+        <order id="2" status="compilation">
+            <date>03.02.2020</date>
+            <deliviredate>01.03.2020</deliviredate>
+            <price>15.6</price>
+            <productlist>
+                <product>
+                    <product_id>1</product_id>
+                    <quantity>1</quantity>
+                </product>
+                <product>
+                    <product_id>3</product_id>
+                    <quantity>1</quantity>
+                </product>
+                <product>
+                    <product_id>2</product_id>
+                    <quantity>2</quantity>
+                </product>
+            </productlist>
+        </order>
+    </user>
+
+    <user id="3" role ="1">
+        <login>boom</login>
+        <pass>332211</pass>
+        <email>poop@gmail.com</email>
+        <userInfo>
+            <name>Леонид</name>
+            <surname>Деминов</surname>
+            <phoneNumber>293333333</phoneNumber>
+        </userInfo>
+        <order id="3" status="confirmed">
+            <date>10.01.2020</date>
+            <deliviredate>20.03.2020</deliviredate>
+            <price>22.0</price>
+            <productlist>
+                <product>
+                    <product_id>2</product_id>
+                    <quantity>10</quantity>
+                </product>
+            </productlist>
+        </order>
+    </user>
+</users>
