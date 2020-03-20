@@ -12,8 +12,8 @@
             <phoneNumber>291111111</phoneNumber>
         </userInfo>
         <order id="1" status="compilation">
-            <date>01.02.2020</date>
-            <deliviredate>05.03.2020</deliviredate>
+            <date>2020-01-02</date>
+            <deliviredate>2020-05-03</deliviredate>
             <price>30.5</price>
             <productlist>
                 <product>
@@ -38,8 +38,8 @@
             <phoneNumber>292222222</phoneNumber>
         </userInfo>
         <order id="2" status="compilation">
-            <date>03.02.2020</date>
-            <deliviredate>01.03.2020</deliviredate>
+            <date>2020-03-02</date>
+            <deliviredate>2020-01-03</deliviredate>
             <price>15.6</price>
             <productlist>
                 <product>
@@ -68,8 +68,8 @@
             <phoneNumber>293333333</phoneNumber>
         </userInfo>
         <order id="3" status="confirmed">
-            <date>10.01.2020</date>
-            <deliviredate>20.03.2020</deliviredate>
+            <date>2020-10-01</date>
+            <deliviredate>2020-10-03</deliviredate>
             <price>22.0</price>
             <productlist>
                 <product>

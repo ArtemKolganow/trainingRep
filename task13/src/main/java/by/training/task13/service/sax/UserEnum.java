@@ -1,14 +1,14 @@
-package by.training.task13.service;
+package by.training.task13.service.sax;
 
 public enum UserEnum {
     USERS("users"),
     USER("user"),
-    USERINFO("userinfo"),
+    USERINFO("userInfo"),
     ID("id"),
     ROLE("role"),
     ORDERID("orderId"),
     STATUS("status"),
-
+    PRODUCT("product"),
     LOGIN("login"),
     PASS("pass"),
     EMAIL("email"),
@@ -31,7 +31,7 @@ public enum UserEnum {
     UserEnum(String value) {
         this.value = value;
     }
-    private String getValue(){
+    public String getValue(){
         return value;
     }
 }

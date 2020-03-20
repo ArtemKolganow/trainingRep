@@ -9,7 +9,7 @@ public class Order {
     private String status;
     private String date;
     private String deliviredate;
-    private String price;
+    private double price;
     private List<Product> productList;
 
     public Order() {
@@ -48,11 +48,11 @@ public class Order {
         this.deliviredate = deliviredate;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

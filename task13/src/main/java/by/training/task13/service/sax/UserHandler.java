@@ -1,4 +1,4 @@
-package by.training.task13.service;
+package by.training.task13.service.sax;
 import by.training.task13.entity.Order;
 import by.training.task13.entity.Product;
 import by.training.task13.entity.User;
@@ -93,7 +93,7 @@ public class UserHandler extends DefaultHandler {
                     currentOrder.setDeliviredate(s);
                     break;
                 case PRICE:
-                    currentOrder.setPrice(s);
+                    currentOrder.setPrice(Double.parseDouble(s));
                     break;
                 case PRODUCT_ID:
                     currentProduct.setProduct_id(Integer.parseInt(s));

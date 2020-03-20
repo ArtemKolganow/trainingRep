@@ -7,10 +7,20 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
+<head>
     <title>My parsers</title>
-  </head>
-  <body>
-  Use /parsers to see data.
-  </body>
+</head>
+<body>
+<form action="${pageContext.request.contextPath}/parsers" method="post" enctype="multipart/form-data">
+    <input type="file" name="file"/>
+    <h4>Language/Язык</h4>
+    <input type="radio" name="language" value="ru_RU">Русский</input><br>
+    <input type="radio" name="language" value="en_UA">English </input><br>
+    <h4>Parser/Парсер</h4>
+    <input type="radio" name="parser" value="stax">StAx</input><br>
+    <input type="radio" name="parser" value="sax">SAX </input><br>
+    <input type="radio" name="parser" value="dom">DOM </input><br>
+    <input type="submit" value="Send"/>
+</form>
+</body>
 </html>
