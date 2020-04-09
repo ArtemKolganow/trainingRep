@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 @WebServlet(name = "Servlet")
 public class Servlet extends HttpServlet {
@@ -18,8 +20,8 @@ public class Servlet extends HttpServlet {
     private String dbHost = "localhost";
     private String dbPort = "3306";
     private String dbName = "workshopdb";
-    private String dbLogin = "root";
-    private String dbPass = "16081999Aa";
+    private String dbLogin = "workshop_user";
+    private String dbPass = "workshop_password";
     private int maxConnections = 1000;
 
     @Override
@@ -34,6 +36,7 @@ public class Servlet extends HttpServlet {
 
     @Override
     public void init(){
+
         String url = "jdbc:mysql://" + dbHost + ":"+ dbPort+"/" + dbName+
                 "?verifyServerCertificate=false"+
                 "&useSSL=false"+
@@ -43,8 +46,9 @@ public class Servlet extends HttpServlet {
                 "&serverTimezone=UTC"+
                 "&allowPublicKeyRetrieval=true";
         try {
+            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
             ConnectionPool.getInstance().init(url,dbLogin,dbPass,maxConnections);
-        } catch (DataObjectException e) {
+        } catch (DataObjectException | SQLException e) {
             logger.error(e);
         }
     }

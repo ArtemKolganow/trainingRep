@@ -14,10 +14,10 @@
   </head>
   <body>
   <ctg:info-time/>
-  <form action="${pageContext.request.contextPath}/index.jsp" method="get">
+  <form action="${pageContext.request.contextPath}/WEB-INF/jsp/index.jsp" method="get">
     <button value="allUsers">All users</button>
   </form>
-  <form action="${pageContext.request.contextPath}/index.jsp" method="get">
+  <form action="${pageContext.request.contextPath}/WEB-INF/jsp/index.jsp" method="get">
     <p>Input ID: </p>
     <label>
       <input name="id" type="text" size="15">
