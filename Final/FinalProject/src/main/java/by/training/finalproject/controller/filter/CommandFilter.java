@@ -19,6 +19,8 @@ public class CommandFilter implements Filter {
 
     static {
         commandMap.put("/login", "LOGIN");
+        commandMap.put("/SignIn", "FORWARD");
+        commandMap.put("/", "MAIN");
     }
 
     public void destroy() {
@@ -38,6 +40,7 @@ public class CommandFilter implements Filter {
         }
         logger.info(commandName);
         String command = commandMap.get(commandName);
+        logger.info(command);
         httpRequest.setAttribute("command", command);
         chain.doFilter(req, resp);
     }

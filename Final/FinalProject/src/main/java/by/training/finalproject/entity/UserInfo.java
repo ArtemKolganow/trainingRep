@@ -2,7 +2,7 @@ package by.training.finalproject.entity;
 
 import java.util.Objects;
 
-public class UserInfo {
+public class UserInfo implements Entity {
     private String name;
     private String surname;
     private String phoneNumber;

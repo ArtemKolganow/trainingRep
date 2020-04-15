@@ -22,16 +22,20 @@ public class Servlet extends HttpServlet {
     private String dbName = "workshopdb";
     private String dbLogin = "workshop_user";
     private String dbPass = "workshop_password";
-    private int maxConnections = 1000;
+    private int startConnections = 10;
+    private int maxConnections = 100;
+    private static Controller controller = new Controller();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        logger.info("in servlet");
+        controller.execute((String) request.getAttribute("command"),request,response);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        logger.info("in servlet");
+        controller.execute((String) request.getAttribute("command"),request,response);
     }
 
     @Override
@@ -47,7 +51,7 @@ public class Servlet extends HttpServlet {
                 "&allowPublicKeyRetrieval=true";
         try {
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-            ConnectionPool.getInstance().init(url,dbLogin,dbPass,maxConnections);
+            ConnectionPool.getInstance().init(url,dbLogin,dbPass,startConnections,maxConnections);
         } catch (DataObjectException | SQLException e) {
             logger.error(e);
         }

@@ -1,11 +1,16 @@
 package by.training.finalproject.dal;
 
+import by.training.finalproject.entity.Entity;
+
+import java.sql.Connection;
 import java.util.List;
 
-public abstract class AbstractDAO <K, T>  {
-    public abstract List<T> findAll() throws DataObjectException;
-    public abstract T findEntityById(K id) throws DataObjectException;
-    public abstract boolean delete(K id) throws DataObjectException;
-    public abstract boolean create(T entity) throws DataObjectException;
-    public abstract T update(T entity);
+interface AbstractDAO <K, T extends Entity>  {
+    List<T> findAll() throws DataObjectException;
+    T findEntityById(K id) throws DataObjectException;
+    boolean delete(K id) throws DataObjectException;
+    boolean create(T entity) throws DataObjectException;
+    void update(T entity) throws DataObjectException;
+    Connection getCn();
+    void setCn(Connection cn);
 }

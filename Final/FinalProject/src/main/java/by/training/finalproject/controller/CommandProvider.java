@@ -12,6 +12,9 @@ public class CommandProvider {
 
     public CommandProvider() {
         repository.put(CommandName.WRONG,new WrongRequest());
+        repository.put(CommandName.LOGIN,new Login());
+        repository.put(CommandName.FORWARD,new Forward());
+        repository.put(CommandName.MAIN,new Main());
     }
 
     Command getCommand(String name){

@@ -2,7 +2,7 @@ package by.training.finalproject.entity;
 
 import java.util.Objects;
 
-public class CraftOrder implements ToSell, Comparable<CraftOrder>{
+public class CraftOrder implements ToSell, Comparable<CraftOrder>, Entity{
     private int id;
     private String title;
     private String orderDescription;

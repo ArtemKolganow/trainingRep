@@ -1,16 +1,17 @@
 package by.training.finalproject.dal;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
-    private List<Connection> availableConns = new LinkedList<>();
-    private List<Connection> usedConns = new LinkedList<>();
+    private List<PooledConnection> availableConns = new LinkedList<>();
     private String login;
     private String pass;
-
+    private int maxConns;
+    private int connectionCounter;
     private String url;
     private ReentrantLock locker =new ReentrantLock();
     private static ConnectionPool instance = new ConnectionPool();
@@ -20,12 +21,13 @@ public class ConnectionPool {
     private ConnectionPool() {
     }
 
-    public void init(String url,String login,String pass, int initConnCnt)throws DataObjectException {
+    public void init(String url,String login,String pass, int initConnCnt, int maxConns)throws DataObjectException {
         this.url = url;
         this.login = login;
         this.pass = pass;
+        this.maxConns = maxConns;
         for (int i = 0; i < initConnCnt; i++) {
-            availableConns.add(newConnection());
+            availableConns.add(new PooledConnection(newConnection(),false));
         }
     }
 
@@ -39,33 +41,37 @@ public class ConnectionPool {
         return conn;
     }
 
-    public Connection getConnection() throws DataObjectException {
+    PooledConnection getPooledConnection() throws DataObjectException {
         locker.lock();
-        Connection newConn = null;
+        PooledConnection newConn = null;
         if (!availableConns.isEmpty()) {
             newConn = availableConns.get(0);
             availableConns.remove(0);
+            connectionCounter++;
         }else {
-            throw new DataObjectException("No free connections!");
+            if(connectionCounter<=maxConns){
+                newConn = new PooledConnection(newConnection(),true);
+                connectionCounter++;
+            }
         }
-        usedConns.add(newConn);
         locker.unlock();
         return newConn;
     }
 
-    public void returnConnection(Connection c) throws DataObjectException {
+    void returnConnection(PooledConnection c) throws DataObjectException {
         locker.lock();
         if (c != null) {
-            if (usedConns.remove(c)) {
-                availableConns.add(c);
+            if (c.isTemp()) {
+                try {
+                    c.getConnection().close();
+                } catch (SQLException e) {
+                    throw new DataObjectException(e);
+                }
             } else {
-                throw new DataObjectException("Connection not in the usedConns array");
+                availableConns.add(c);
             }
         }
         locker.unlock();
     }
 
-    public int getAvailableConnsCnt() {
-        return availableConns.size();
-    }
 }

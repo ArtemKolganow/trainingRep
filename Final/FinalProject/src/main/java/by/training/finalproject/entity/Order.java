@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class Order implements Comparable<Order> {
+public class Order implements Comparable<Order>, Entity {
     private int id;
     private Status status;
     private Date date;

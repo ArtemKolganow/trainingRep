@@ -4,5 +4,5 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public interface Command {
-    String exec(String requestStr, HttpServletRequest request, HttpServletResponse response);
+    void exec(HttpServletRequest request, HttpServletResponse response);
 }

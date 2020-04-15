@@ -16,7 +16,7 @@
 <c:url value="/login.html" var="loginUrl"/>
 <FORM action="${loginUrl}" method="post">
     <LABEL for="login">User name:</LABEL>
-    <INPUT type="text" id="login" name="login" value="${param.login}">
+    <INPUT type="text" id="login" name="login">
     <LABEL for="password">Password:</LABEL>
     <INPUT type="password" id="password" name="password">
     <BUTTON type="submit">Войти</BUTTON>

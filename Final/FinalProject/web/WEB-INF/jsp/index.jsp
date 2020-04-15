@@ -1,5 +1,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ taglib prefix="ctg" uri="customtags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: ASUS
@@ -14,15 +15,9 @@
   </head>
   <body>
   <ctg:info-time/>
-  <form action="${pageContext.request.contextPath}/WEB-INF/jsp/index.jsp" method="get">
-    <button value="allUsers">All users</button>
-  </form>
-  <form action="${pageContext.request.contextPath}/WEB-INF/jsp/index.jsp" method="get">
-    <p>Input ID: </p>
-    <label>
-      <input name="id" type="text" size="15">
-    </label>
-    <input type="submit" value="Send">
-  </form>
+  <c:url value="/SignIn.html" var="loginUrl"/>
+  <FORM action="${loginUrl}" method="post">
+    <BUTTON type="submit">Go to LogIn</BUTTON>
+  </FORM>
   </body>
 </html>

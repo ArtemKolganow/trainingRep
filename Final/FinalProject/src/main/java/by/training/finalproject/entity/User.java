@@ -1,9 +1,10 @@
 package by.training.finalproject.entity;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class User implements Comparable<User> {
+public class User implements Comparable<User>, Serializable, Entity {
     private int id;
     private String login;
     private String pass;

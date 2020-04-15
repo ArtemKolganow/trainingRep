@@ -3,7 +3,7 @@ package by.training.finalproject.entity;
 import java.util.List;
 import java.util.Objects;
 
-public class Product implements ToSell, Comparable<Product> {
+public class Product implements ToSell, Comparable<Product>, Entity {
     private int id;
     private String name;
     private String type;
