@@ -1,5 +1,7 @@
-package by.training.finalproject.dal;
+package by.training.finalproject.dal.impl;
 
+import by.training.finalproject.dal.DataObjectException;
+import by.training.finalproject.dal.UserDAO;
 import by.training.finalproject.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,12 +13,12 @@ import java.util.List;
 public class UserDAOimpl implements UserDAO {
     private static final Logger logger = LogManager.getLogger(UserDAOimpl.class);
     private Connection cn;
-    private static final String SQL_SELECT_ALL_USERS = "SELECT * FROM user";
-    private static final String SQL_SELECT_USER_BY_ID = "SELECT * FROM user WHERE id=?";
-    private static final String SQL_SELECT_USER_BY_LOGIN_AND_PASS = "SELECT id, login, pass, email, role FROM user WHERE login=? AND pass=?";
-    private static final String SQL_DELETE_ALL_USERS_BY_ID = "DELETE * FROM user WHERE id=?";
-    private static final String SQL_INSERT_USER = "INSERT INTO (`login`,`pass`,`email`,`role`) VALUES (?,?,?,?)";
-    private static final String SQL_UPDATE_USER = "UPDATE user SET `login`=?,`pass`=?,`email`=?,`role`=? WHERE `id`=?";
+    private static final String SQL_SELECT_ALL_USERS = "SELECT * FROM workshopdb.user";
+    private static final String SQL_SELECT_USER_BY_ID = "SELECT * FROM workshopdb.user WHERE id=?";
+    private static final String SQL_SELECT_USER_BY_LOGIN_AND_PASS = "SELECT id, login, pass, email, role FROM workshopdb.user WHERE login=? AND pass=?";
+    private static final String SQL_DELETE_ALL_USERS_BY_ID = "DELETE FROM workshopdb.user WHERE id=?";
+    private static final String SQL_INSERT_USER = "INSERT INTO workshopdb.user (`login`,`pass`,`email`,`role`) VALUES (?,?,?,?)";
+    private static final String SQL_UPDATE_USER = "UPDATE workshopdb.user SET `login`=?,`pass`=?,`email`=?,`role`=? WHERE `id`=?";
 
 
     @Override
@@ -70,11 +72,11 @@ public class UserDAOimpl implements UserDAO {
     }
 
     @Override
-    public boolean delete(Integer id) throws DataObjectException {
+    public boolean delete(User entity) throws DataObjectException {
         boolean result;
         try{
             try(PreparedStatement pr = cn.prepareStatement(SQL_DELETE_ALL_USERS_BY_ID)){
-                pr.setString(1,id.toString());
+                pr.setString(1,String.valueOf(entity.getId()));
                 result = pr.execute();
             }
         } catch (SQLException e) {

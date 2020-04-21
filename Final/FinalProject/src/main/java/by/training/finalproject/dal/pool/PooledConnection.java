@@ -1,4 +1,4 @@
-package by.training.finalproject.dal;
+package by.training.finalproject.dal.pool;
 
 import java.sql.Connection;
 import java.util.Objects;

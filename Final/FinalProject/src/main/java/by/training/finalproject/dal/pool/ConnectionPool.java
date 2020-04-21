@@ -1,4 +1,6 @@
-package by.training.finalproject.dal;
+package by.training.finalproject.dal.pool;
+import by.training.finalproject.dal.DataObjectException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -41,7 +43,7 @@ public class ConnectionPool {
         return conn;
     }
 
-    PooledConnection getPooledConnection() throws DataObjectException {
+    public PooledConnection getPooledConnection() throws DataObjectException {
         locker.lock();
         PooledConnection newConn = null;
         if (!availableConns.isEmpty()) {
@@ -58,7 +60,7 @@ public class ConnectionPool {
         return newConn;
     }
 
-    void returnConnection(PooledConnection c) throws DataObjectException {
+    public void returnConnection(PooledConnection c) throws DataObjectException {
         locker.lock();
         if (c != null) {
             if (c.isTemp()) {

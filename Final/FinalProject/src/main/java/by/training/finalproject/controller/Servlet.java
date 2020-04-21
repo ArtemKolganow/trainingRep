@@ -1,6 +1,6 @@
 package by.training.finalproject.controller;
 
-import by.training.finalproject.dal.ConnectionPool;
+import by.training.finalproject.dal.pool.ConnectionPool;
 import by.training.finalproject.dal.DataObjectException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

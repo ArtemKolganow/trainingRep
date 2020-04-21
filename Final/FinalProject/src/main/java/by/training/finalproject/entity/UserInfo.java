@@ -6,6 +6,7 @@ public class UserInfo implements Entity {
     private String name;
     private String surname;
     private String phoneNumber;
+    private int id;
 
     public String getName() {
         return name;
@@ -31,19 +32,28 @@ public class UserInfo implements Entity {
         this.phoneNumber = phoneNumber;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserInfo userInfo = (UserInfo) o;
-        return Objects.equals(name, userInfo.name) &&
+        return id == userInfo.id &&
+                Objects.equals(name, userInfo.name) &&
                 Objects.equals(surname, userInfo.surname) &&
                 Objects.equals(phoneNumber, userInfo.phoneNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, phoneNumber);
+        return Objects.hash(name, surname, phoneNumber, id);
     }
 
     @Override
@@ -52,6 +62,7 @@ public class UserInfo implements Entity {
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", id=" + id +
                 '}';
     }
 }

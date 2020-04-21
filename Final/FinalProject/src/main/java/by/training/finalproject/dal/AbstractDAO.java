@@ -5,10 +5,9 @@ import by.training.finalproject.entity.Entity;
 import java.sql.Connection;
 import java.util.List;
 
-interface AbstractDAO <K, T extends Entity>  {
+public interface AbstractDAO <K, T extends Entity>  {
     List<T> findAll() throws DataObjectException;
-    T findEntityById(K id) throws DataObjectException;
-    boolean delete(K id) throws DataObjectException;
+    boolean delete(T entity) throws DataObjectException;
     boolean create(T entity) throws DataObjectException;
     void update(T entity) throws DataObjectException;
     Connection getCn();

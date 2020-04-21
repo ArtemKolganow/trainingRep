@@ -11,7 +11,7 @@ public class Product implements ToSell, Comparable<Product>, Entity {
     private double weight;
     private String image;
     private List<String> materials;
-    private double sale;
+    private Sale sale;
 
     @Override
     public String toString() {
@@ -35,7 +35,7 @@ public class Product implements ToSell, Comparable<Product>, Entity {
         return id == product.id &&
                 Double.compare(product.price, price) == 0 &&
                 Double.compare(product.weight, weight) == 0 &&
-                Double.compare(product.sale, sale) == 0 &&
+                Objects.equals(product.sale, sale) &&
                 Objects.equals(name, product.name) &&
                 Objects.equals(type, product.type) &&
                 Objects.equals(image, product.image) &&
@@ -103,11 +103,11 @@ public class Product implements ToSell, Comparable<Product>, Entity {
         this.materials = materials;
     }
 
-    public double getSale() {
+    public Sale getSale() {
         return sale;
     }
 
-    public void setSale(double sale) {
+    public void setSale(Sale sale) {
         this.sale = sale;
     }
 

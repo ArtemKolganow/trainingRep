@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface UserDAO extends AbstractDAO<Integer, User> {
     User findEntityByLoginAndPass(String login, String pass) throws DataObjectException;
+    User findEntityById(Integer id) throws DataObjectException;
 }
