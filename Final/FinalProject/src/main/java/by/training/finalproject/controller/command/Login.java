@@ -1,6 +1,9 @@
 package by.training.finalproject.controller.command;
 
+import by.training.finalproject.controller.CommandProvider;
+import by.training.finalproject.controller.Forward;
 import by.training.finalproject.entity.User;
+import by.training.finalproject.service.ProductService;
 import by.training.finalproject.service.ServiceException;
 import by.training.finalproject.service.ServiceFactory;
 import by.training.finalproject.service.UserService;
@@ -25,12 +28,19 @@ public class Login implements Command {
             String pass = request.getParameter("password");
             logger.info(pass);
             User user = service.findByLoginAndPass(login,pass);
-            if(user!=null){
+            Forward forward = new Forward();
+            if(user.getLogin()!=null){
                 HttpSession session = request.getSession();
                 session.setAttribute("authorizedUser", user);
-                request.getRequestDispatcher("WEB-INF/jsp/index.jsp").forward(request, response);
+                ProductService productService = (ProductService) factory.getService("Product");
+                request.setAttribute("productList",productService.readAllProducts());
+                forward.setRedirect(false);
+                forward.setUrl("WEB-INF/jsp/index.jsp");
+                forward.forward(request, response);
             }else{
-                request.getRequestDispatcher("WEB-INF/jsp/SignIn.jsp").forward(request, response);
+                forward.setRedirect(true);
+                forward.setUrl("WEB-INF/jsp/SignIn.jsp");
+                forward.forward(request, response);
             }
         } catch (ServiceException | ServletException | IOException e) {
             logger.error(e);

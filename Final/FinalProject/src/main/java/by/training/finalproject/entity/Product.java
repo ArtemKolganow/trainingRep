@@ -47,6 +47,7 @@ public class Product implements ToSell, Comparable<Product>, Entity {
         return Objects.hash(id, name, type, price, weight, image, materials, sale);
     }
 
+    @Override
     public int getId() {
         return id;
     }

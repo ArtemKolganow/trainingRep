@@ -8,6 +8,8 @@ public class ServiceFactory {
 
     static {
         SERVICES.put("User", new UserServiceimpl());
+        SERVICES.put("Product", new ProductServiceimpl());
+
     }
 
     public Service getService(String key) throws ServiceException {

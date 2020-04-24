@@ -1,12 +1,15 @@
 package by.training.finalproject.entity;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 public class CraftOrder implements ToSell, Comparable<CraftOrder>, Entity{
     private int id;
+    private int userId;
     private String title;
     private String orderDescription;
-    private String Date;
+    private LocalDate date;
     private State state;
     private double price;
 
@@ -14,9 +17,10 @@ public class CraftOrder implements ToSell, Comparable<CraftOrder>, Entity{
     public String toString() {
         return "CraftOrder{" +
                 "id=" + id +
+                ", userId=" + userId +
                 ", title='" + title + '\'' +
                 ", orderDescription='" + orderDescription + '\'' +
-                ", Date='" + Date + '\'' +
+                ", date=" + date +
                 ", state=" + state +
                 ", price=" + price +
                 '}';
@@ -28,18 +32,36 @@ public class CraftOrder implements ToSell, Comparable<CraftOrder>, Entity{
         if (o == null || getClass() != o.getClass()) return false;
         CraftOrder that = (CraftOrder) o;
         return id == that.id &&
+                userId == that.userId &&
                 Double.compare(that.price, price) == 0 &&
                 Objects.equals(title, that.title) &&
                 Objects.equals(orderDescription, that.orderDescription) &&
-                Objects.equals(Date, that.Date) &&
+                Objects.equals(date, that.date) &&
                 state == that.state;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, orderDescription, Date, state, price);
+        return Objects.hash(id, userId, title, orderDescription, date, state, price);
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    @Override
     public int getId() {
         return id;
     }
@@ -64,13 +86,6 @@ public class CraftOrder implements ToSell, Comparable<CraftOrder>, Entity{
         this.orderDescription = orderDescription;
     }
 
-    public String getDate() {
-        return Date;
-    }
-
-    public void setDate(String date) {
-        Date = date;
-    }
 
     public State getState() {
         return state;

@@ -1,22 +1,24 @@
 package by.training.finalproject.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 public class Order implements Comparable<Order>, Entity {
     private int id;
+    private int userId;
     private Status status;
-    private Date date;
-    private Date deliveryDate;
+    private LocalDate date;
+    private LocalDate deliveryDate;
     private double price;
-    private List<ToSell> productList;
+    private List<RegisteredProduct> productList;
 
-    public List<ToSell> getProductList() {
+    public List<RegisteredProduct> getProductList() {
         return productList;
     }
 
-    public void setProductList(List<ToSell> productList) {
+    public void setProductList(List<RegisteredProduct> productList) {
         this.productList = productList;
     }
 
@@ -36,19 +38,19 @@ public class Order implements Comparable<Order>, Entity {
         this.status = status;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public Date getDeliveryDate() {
+    public LocalDate getDeliveryDate() {
         return deliveryDate;
     }
 
-    public void setDeliveryDate(Date deliveryDate) {
+    public void setDeliveryDate(LocalDate deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 
@@ -60,12 +62,21 @@ public class Order implements Comparable<Order>, Entity {
         this.price = price;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
         return id == order.id &&
+                userId == order.userId &&
                 Double.compare(order.price, price) == 0 &&
                 status == order.status &&
                 Objects.equals(date, order.date) &&
@@ -75,13 +86,14 @@ public class Order implements Comparable<Order>, Entity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, status, date, deliveryDate, price, productList);
+        return Objects.hash(id, userId, status, date, deliveryDate, price, productList);
     }
 
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
+                ", userId=" + userId +
                 ", status=" + status +
                 ", date=" + date +
                 ", deliveryDate=" + deliveryDate +

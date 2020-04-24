@@ -4,17 +4,19 @@ package by.training.finalproject.controller;
 
 import by.training.finalproject.controller.command.*;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CommandProvider {
-    private final Map<CommandName, Command> repository = new HashMap<>();
+    private final Map<CommandName, Command> repository = new EnumMap<>(CommandName.class);
 
-    public CommandProvider() {
+    CommandProvider() {
         repository.put(CommandName.WRONG,new WrongRequest());
         repository.put(CommandName.LOGIN,new Login());
-        repository.put(CommandName.FORWARD,new Forward());
+        repository.put(CommandName.TOLOGINPAGE,new ToLoginPage());
         repository.put(CommandName.MAIN,new Main());
+        repository.put(CommandName.LOGOUT,new LogOut());
     }
 
     Command getCommand(String name){

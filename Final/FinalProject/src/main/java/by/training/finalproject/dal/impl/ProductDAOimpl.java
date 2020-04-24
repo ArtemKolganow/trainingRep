@@ -3,9 +3,7 @@ package by.training.finalproject.dal.impl;
 import by.training.finalproject.dal.DataObjectException;
 import by.training.finalproject.dal.ProductDAO;
 import by.training.finalproject.dal.SaleDAO;
-import by.training.finalproject.dal.pool.ConnectionPool;
 import by.training.finalproject.entity.Product;
-import by.training.finalproject.entity.Sale;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,7 +26,9 @@ public class ProductDAOimpl implements ProductDAO {
     private static final String SQL_SELECT_ID_TO_TYPE = "SELECT type FROM workshopdb.type WHERE id=?";
     private static final String SQL_SELECT_MATERIAL_TO_ID = "SELECT id FROM workshopdb.material WHERE material.name=?";
     private static final String SQL_SELECT_ID_TO_MATERIAL = "SELECT name FROM workshopdb.material WHERE material.id=?";
-    private static final String SQL_SELECT_MATERIALLIST = "SELECT * FROM workshopdb.materiallist WHERE product_id=?";
+    private static final String SQL_SELECT_MATERIAL_LIST = "SELECT * FROM workshopdb.materiallist WHERE product_id=?";
+    private static final String SQL_INSERT_MATERIAL_LIST = "INSERT INTO workshopdb.materiallist (material_id, product_id) VALUES (?,?)";
+    private static final String SQL_DELETE_MATERIAL_LIST_BY_ID = "DELETE FROM workshopdb.materiallist WHERE product_id=?";
 
     @Override
     public List<Product> findAll() throws DataObjectException {
@@ -69,11 +69,12 @@ public class ProductDAOimpl implements ProductDAO {
 
     private void productFromResultSet(Product product, ResultSet resultSet) throws SQLException, DataObjectException {
         product.setId(resultSet.getInt("id"));
-        product.setType(getTypeById(Integer.parseInt(resultSet.getString("type"))));
+        product.setType(resultSet.getString("type"));
         product.setName(resultSet.getString("name"));
         product.setPrice(resultSet.getDouble("price"));
         product.setWeight(resultSet.getDouble("weight"));
         product.setImage(resultSet.getString("img"));
+        logger.info(resultSet.getString("img"));
         product.setMaterials(readMaterialList(resultSet.getInt("id")));
     }
 
@@ -84,6 +85,14 @@ public class ProductDAOimpl implements ProductDAO {
             try(PreparedStatement pr = cn.prepareStatement(SQL_DELETE_PRODUCT_BY_ID)){
                 pr.setString(1,String.valueOf(entity.getId()));
                 result = pr.execute();
+            }
+                try(PreparedStatement pr = cn.prepareStatement(SQL_DELETE_MATERIAL_LIST_BY_ID)){
+                    pr.setString(1,String.valueOf(entity.getId()));
+                }
+            if(!entity.getSale().getSaleValue().equals(1.0)) {
+                SaleDAO saleDAO = new SaleDAOimpl();
+                saleDAO.setCn(cn);
+                saleDAO.delete(entity.getSale());
             }
         } catch (SQLException e) {
             throw new DataObjectException("In delete.", e);
@@ -106,7 +115,7 @@ public class ProductDAOimpl implements ProductDAO {
                 result = pr.execute();
             }
             for(int i = 0; i<entity.getMaterials().size();i++){
-                try(PreparedStatement pr = cn.prepareStatement("INSERT INTO workshopdb.materiallist (material_id, product_id) VALUES (?,?)")){
+                try(PreparedStatement pr = cn.prepareStatement(SQL_INSERT_MATERIAL_LIST)){
                     pr.setString(1,String.valueOf(getMaterialId(entity.getMaterials().get(i))));
                     pr.setString(2,String.valueOf(entity.getId()));
                 }
@@ -208,7 +217,7 @@ public class ProductDAOimpl implements ProductDAO {
     private List<String> readMaterialList(Integer id) throws DataObjectException {
         List<String> materials = new ArrayList<>();
         try {
-            try(PreparedStatement st = cn.prepareStatement(SQL_SELECT_MATERIALLIST)){
+            try(PreparedStatement st = cn.prepareStatement(SQL_SELECT_MATERIAL_LIST)){
                 st.setString(1, id.toString());
                 try (ResultSet resultSet = st.executeQuery()) {
                     while (resultSet.next()) {

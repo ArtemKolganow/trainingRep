@@ -19,8 +19,9 @@ public class CommandFilter implements Filter {
 
     static {
         commandMap.put("/login", "LOGIN");
-        commandMap.put("/SignIn", "FORWARD");
+        commandMap.put("/SignIn", "TOLOGINPAGE");
         commandMap.put("/", "MAIN");
+        commandMap.put("/LogOut","LOGOUT");
     }
 
     public void destroy() {

@@ -2,7 +2,8 @@ package by.training.finalproject.controller;
 
 public enum CommandName {
     LOGIN,
-    FORWARD,
+    TOLOGINPAGE,
     MAIN,
+    LOGOUT,
     WRONG
 }
