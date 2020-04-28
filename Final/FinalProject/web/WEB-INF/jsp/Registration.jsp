@@ -29,11 +29,12 @@
 <c:url value="/registration.html" var="regURL"/>
 <jsp:useBean id="authorizedUser" scope="session" class="by.training.finalproject.entity.User"/>
 <c:url value="/LogOut.html" var="logOunURL"/>
+<c:url value="/profile.html" var="profileURL"/>
 <nav class="navbar navbar-light" style="background-color: #CFCFDF">
     <a class="navbar-brand" href="${pageContext.request.contextPath}/">WorkShop</a>
     <form class="form-inline">
         <c:if test="${authorizedUser.login != null}">
-            Hello: <a href="">${authorizedUser.login}</a>
+            Hello: <a href="${profileURL}">${authorizedUser.login}</a>
             <a class="btn form-control btn-sm align-middle btn-outline-secondary" href="${logOunURL}">Log out</a>
         </c:if>
     </form>
@@ -45,7 +46,7 @@
             <label for="email"></label><INPUT type="email" id="email" name="email" placeholder="Email"><br>
             <label for="password"></label><INPUT type="password" id="password" name="password" placeholder="Password"><br>
             <label for="confirmPassword"></label><INPUT type="password" id="confirmPassword" name="confirmPassword" placeholder="One more time password"><br><br>
-            <BUTTON class="btn  btn-sm align-middle btn-outline-secondary" type="submit" style="width: 20%">LogIn</BUTTON>
+            <BUTTON class="btn  btn-sm align-middle btn-outline-secondary" type="submit" style="width: 20%">Create</BUTTON>
         </FORM>
     </div>
 </c:if>

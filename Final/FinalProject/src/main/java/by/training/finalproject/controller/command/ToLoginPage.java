@@ -1,5 +1,6 @@
 package by.training.finalproject.controller.command;
 
+import by.training.finalproject.controller.Forward;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,11 +13,8 @@ public class ToLoginPage implements Command {
     private static final Logger logger = LogManager.getLogger(ToLoginPage.class);
     @Override
     public void exec(HttpServletRequest request, HttpServletResponse response) {
-        try {
             logger.info("in forward");
-            request.getRequestDispatcher("WEB-INF/jsp/SignIn.jsp").forward(request, response);
-        } catch (ServletException | IOException e) {
-           logger.error(e);
-        }
+            Forward forward = new Forward(false,"WEB-INF/jsp/SignIn.jsp");
+            forward.forward(request,response);
     }
 }

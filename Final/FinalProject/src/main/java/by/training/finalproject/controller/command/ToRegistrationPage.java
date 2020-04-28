@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class WrongRequest implements Command {
-    private static final Logger logger = LogManager.getLogger(WrongRequest.class);
+public class ToRegistrationPage implements Command {
+    private static final Logger logger = LogManager.getLogger(ToRegistrationPage.class);
     @Override
     public void exec(HttpServletRequest request, HttpServletResponse response) {
-        Forward forward = new Forward(false,"WEB-INF/jsp/error.jsp");
-        forward.forward(request,response);
+            logger.info("in forward");
+            Forward forward = new Forward(false,"WEB-INF/jsp/Registration.jsp");
+            forward.forward(request,response);
     }
 }

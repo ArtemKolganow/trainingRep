@@ -1,11 +1,16 @@
 package by.training.finalproject.controller;
 
+import by.training.finalproject.controller.command.ShowAllUsers;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class Forward {
+    private static final Logger logger = LogManager.getLogger(Forward.class);
     private boolean isRedirect;
     private String url;
 
@@ -33,11 +38,15 @@ public class Forward {
         this.url = url;
     }
 
-    public void forward(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(isRedirect){
-           response.sendRedirect(url);
-        }else{
-            request.getRequestDispatcher(url).forward(request, response);
+    public void forward(HttpServletRequest request, HttpServletResponse response){
+        try {
+            if (isRedirect) {
+                response.sendRedirect(url);
+            } else {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
+        } catch (ServletException | IOException e) {
+            logger.error(e);
         }
     }
 }

@@ -38,11 +38,13 @@ public class Login implements Command {
                 forward.setUrl("WEB-INF/jsp/index.jsp");
                 forward.forward(request, response);
             }else{
-                forward.setRedirect(true);
+                forward.setRedirect(false);
                 forward.setUrl("WEB-INF/jsp/SignIn.jsp");
                 forward.forward(request, response);
             }
-        } catch (ServiceException | ServletException | IOException e) {
+        } catch (ServiceException e) {
+            Forward forward = new Forward(false,"WEB-INF/jsp/error.jsp");
+            forward.forward(request,response);
             logger.error(e);
         }
     }

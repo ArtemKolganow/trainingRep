@@ -1,5 +1,6 @@
 package by.training.finalproject.controller.filter;
 
+import by.training.finalproject.controller.Forward;
 import by.training.finalproject.controller.Servlet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -7,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +24,10 @@ public class CommandFilter implements Filter {
         commandMap.put("/SignIn", "TOLOGINPAGE");
         commandMap.put("/", "MAIN");
         commandMap.put("/LogOut","LOGOUT");
+        commandMap.put("/ToRegistration","TOREGISTRATIONPAGE");
+        commandMap.put("/registration","REGISTRATION");
+        commandMap.put("/profile","PROFILE");
+        commandMap.put("/toOrderList","ORDERLIST");
     }
 
     public void destroy() {
@@ -41,6 +47,10 @@ public class CommandFilter implements Filter {
         }
         logger.info(commandName);
         String command = commandMap.get(commandName);
+        if(command==null){
+            Forward forward = new Forward(false,"WEB-INF/jsp/error.jsp");
+            forward.forward((HttpServletRequest) req, (HttpServletResponse) resp);
+        }
         logger.info(command);
         httpRequest.setAttribute("command", command);
         chain.doFilter(req, resp);

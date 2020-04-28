@@ -1,5 +1,7 @@
 package by.training.finalproject.entity;
 
-public interface ToSell {
+import java.io.Serializable;
+
+public interface ToSell extends Serializable {
     int getId();
 }

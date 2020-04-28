@@ -1,8 +1,9 @@
 package by.training.finalproject.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class UserInfo implements Entity {
+public class UserInfo implements Entity, Serializable {
     private String name;
     private String surname;
     private String phoneNumber;

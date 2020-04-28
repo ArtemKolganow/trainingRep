@@ -1,8 +1,9 @@
 package by.training.finalproject.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Sale implements Entity {
+public class Sale implements Entity, Serializable {
     private Double saleValue;
     private int id;
 

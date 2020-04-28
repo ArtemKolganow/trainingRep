@@ -17,15 +17,18 @@ public class LogOut implements Command {
     private static final Logger logger = LogManager.getLogger(LogOut.class);
     @Override
     public void exec(HttpServletRequest request, HttpServletResponse response) {
-        Forward forward = new Forward(false,"WEB-INF/jsp/index.jsp");
+
         ServiceFactory factory = new ServiceFactory();
         try {
+            Forward forward = new Forward(false,"WEB-INF/jsp/index.jsp");
             HttpSession session = request.getSession();
             session.removeAttribute("authorizedUser");
             ProductService productService = (ProductService) factory.getService("Product");
             request.setAttribute("productList",productService.readAllProducts());
             forward.forward(request,response);
-        } catch (ServletException | IOException | ServiceException e) {
+        } catch (ServiceException e) {
+            Forward forward = new Forward(false,"WEB-INF/jsp/error.jsp");
+            forward.forward(request,response);
            logger.error(e);
         }
     }

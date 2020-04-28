@@ -1,8 +1,9 @@
 package by.training.finalproject.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class RegisteredProduct implements Entity {
+public class RegisteredProduct implements Entity, Serializable {
     private int orderId;
     private ToSell product;
     private int quantity;

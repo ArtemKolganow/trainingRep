@@ -1,11 +1,12 @@
 package by.training.finalproject.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class Order implements Comparable<Order>, Entity {
+public class Order implements Comparable<Order>, Entity, Serializable {
     private int id;
     private int userId;
     private Status status;

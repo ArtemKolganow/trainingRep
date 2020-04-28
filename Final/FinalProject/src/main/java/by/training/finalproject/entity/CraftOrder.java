@@ -1,10 +1,11 @@
 package by.training.finalproject.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
-public class CraftOrder implements ToSell, Comparable<CraftOrder>, Entity{
+public class CraftOrder implements ToSell, Comparable<CraftOrder>, Entity, Serializable {
     private int id;
     private int userId;
     private String title;

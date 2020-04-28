@@ -17,6 +17,11 @@ public class CommandProvider {
         repository.put(CommandName.TOLOGINPAGE,new ToLoginPage());
         repository.put(CommandName.MAIN,new Main());
         repository.put(CommandName.LOGOUT,new LogOut());
+        repository.put(CommandName.TOREGISTRATIONPAGE,new ToRegistrationPage());
+        repository.put(CommandName.REGISTRATION,new Registration());
+        repository.put(CommandName.PROFILE,new Profile());
+        repository.put(CommandName.ORDERLIST,new OrderList());
+
     }
 
     Command getCommand(String name){

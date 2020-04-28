@@ -5,5 +5,9 @@ public enum CommandName {
     TOLOGINPAGE,
     MAIN,
     LOGOUT,
+    TOREGISTRATIONPAGE,
+    REGISTRATION,
+    PROFILE,
+    ORDERLIST,
     WRONG
 }

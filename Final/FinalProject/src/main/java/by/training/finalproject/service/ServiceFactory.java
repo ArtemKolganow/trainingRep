@@ -9,7 +9,8 @@ public class ServiceFactory {
     static {
         SERVICES.put("User", new UserServiceimpl());
         SERVICES.put("Product", new ProductServiceimpl());
-
+        SERVICES.put("UserInfo", new UserInfoServiceimpl());
+        SERVICES.put("Order", new OrderServiceimpl());
     }
 
     public Service getService(String key) throws ServiceException {

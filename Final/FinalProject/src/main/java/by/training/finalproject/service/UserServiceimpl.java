@@ -68,4 +68,40 @@ public class UserServiceimpl implements UserService {
         throw new ServiceException("Error in close.",e);
     }
     }
+
+    @Override
+    public boolean addNewUser(User user) throws ServiceException {
+        TransactionFactory factory = null;
+        try {
+            factory =  new TrasactionFactoryimpl();
+        } catch (DataObjectException e) {
+            throw new ServiceException("Error in Transaction factory init.",e);
+        }
+        try {
+            try {
+                logger.info("Come to service user in register.");
+                Transaction transaction = factory.createTransaction();
+                UserDAO dao = (UserDAO) transaction.createDao("UserDAO");
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                md.update(user.getPass().getBytes());
+                byte[] byteData = md.digest();
+                StringBuilder hashPass = new StringBuilder();
+                for (byte aByteData : byteData) {
+                    String hex = Integer.toHexString(0xff & aByteData);
+                    if (hex.length() == 1) hashPass.append('0');
+                    hashPass.append(hex);
+                }
+                user.setPass(hashPass.toString());
+                boolean res = dao.create(user);
+                transaction.commit();
+                return res;
+            } catch (DataObjectException | NoSuchAlgorithmException e) {
+                throw new ServiceException(e);
+            }finally {
+                factory.close();
+            }
+        } catch (DataObjectException e) {
+            throw new ServiceException("Error in close.",e);
+        }
+    }
 }

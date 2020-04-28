@@ -24,7 +24,9 @@ public class Main implements Command {
             request.setAttribute("productList",productService.readAllProducts());
             Forward forward = new Forward(false,"WEB-INF/jsp/index.jsp");
             forward.forward(request,response);
-        } catch (ServletException | IOException | ServiceException e) {
+        } catch (ServiceException e) {
+            Forward forward = new Forward(false,"WEB-INF/jsp/error.jsp");
+            forward.forward(request,response);
             logger.error(e);
         }
     }

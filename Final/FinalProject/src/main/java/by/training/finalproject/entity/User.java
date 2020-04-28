@@ -11,6 +11,7 @@ public class User implements Comparable<User>, Serializable, Entity {
     private String email;
     private Integer role;
     private List<Order> orders;
+    private UserInfo userInfo;
 
     public List<Order> getOrders() {
         return orders;
@@ -69,6 +70,7 @@ public class User implements Comparable<User>, Serializable, Entity {
                 ", email='" + email + '\'' +
                 ", role=" + role +
                 ", orders=" + orders +
+                ", userInfo=" + userInfo +
                 '}';
     }
 
@@ -77,17 +79,26 @@ public class User implements Comparable<User>, Serializable, Entity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) &&
+        return id == user.id &&
                 Objects.equals(login, user.login) &&
                 Objects.equals(pass, user.pass) &&
                 Objects.equals(email, user.email) &&
                 Objects.equals(role, user.role) &&
-                Objects.equals(orders, user.orders);
+                Objects.equals(orders, user.orders) &&
+                Objects.equals(userInfo, user.userInfo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, pass, email, role, orders);
+        return Objects.hash(id, login, pass, email, role, orders, userInfo);
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 
     @Override

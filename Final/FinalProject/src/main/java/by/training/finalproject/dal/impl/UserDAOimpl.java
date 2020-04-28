@@ -87,19 +87,20 @@ public class UserDAOimpl implements UserDAO {
 
     @Override
     public boolean create(User entity) throws DataObjectException {
-        boolean result;
+        int result;
         try{
             try(PreparedStatement pr = cn.prepareStatement(SQL_INSERT_USER)){
                 pr.setString(1,entity.getLogin());
                 pr.setString(2,entity.getPass());
                 pr.setString(3,entity.getEmail());
                 pr.setString(4,entity.getRole().toString());
-                result = pr.execute();
+                result = pr.executeUpdate();
+                logger.info(result);
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In create.", e);
+            throw new DataObjectException(e);
         }
-        return result;
+        return result == 1;
     }
 
     @Override

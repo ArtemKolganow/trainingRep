@@ -1,9 +1,10 @@
 package by.training.finalproject.entity;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class Product implements ToSell, Comparable<Product>, Entity {
+public class Product implements ToSell, Comparable<Product>, Entity, Serializable {
     private int id;
     private String name;
     private String type;
