@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class Product implements ToSell, Comparable<Product>, Entity, Serializable {
+public class Product implements  Comparable<Product>, Entity, Serializable {
     private int id;
     private String name;
     private String type;
@@ -12,7 +12,6 @@ public class Product implements ToSell, Comparable<Product>, Entity, Serializabl
     private double weight;
     private String image;
     private List<String> materials;
-    private Sale sale;
 
     @Override
     public String toString() {
@@ -24,7 +23,6 @@ public class Product implements ToSell, Comparable<Product>, Entity, Serializabl
                 ", weight=" + weight +
                 ", image='" + image + '\'' +
                 ", materials=" + materials +
-                ", sale=" + sale +
                 '}';
     }
 
@@ -36,7 +34,6 @@ public class Product implements ToSell, Comparable<Product>, Entity, Serializabl
         return id == product.id &&
                 Double.compare(product.price, price) == 0 &&
                 Double.compare(product.weight, weight) == 0 &&
-                Objects.equals(product.sale, sale) &&
                 Objects.equals(name, product.name) &&
                 Objects.equals(type, product.type) &&
                 Objects.equals(image, product.image) &&
@@ -45,10 +42,9 @@ public class Product implements ToSell, Comparable<Product>, Entity, Serializabl
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, type, price, weight, image, materials, sale);
+        return Objects.hash(id, name, type, price, weight, image, materials);
     }
 
-    @Override
     public int getId() {
         return id;
     }
@@ -105,13 +101,6 @@ public class Product implements ToSell, Comparable<Product>, Entity, Serializabl
         this.materials = materials;
     }
 
-    public Sale getSale() {
-        return sale;
-    }
-
-    public void setSale(Sale sale) {
-        this.sale = sale;
-    }
 
     @Override
     public int compareTo(Product product) {

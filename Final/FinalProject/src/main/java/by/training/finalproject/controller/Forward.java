@@ -1,6 +1,5 @@
 package by.training.finalproject.controller;
 
-import by.training.finalproject.controller.command.ShowAllUsers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

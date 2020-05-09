@@ -50,7 +50,7 @@ public class UserDAOimpl implements UserDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select all.",e);
+            throw new DataObjectException(e);
         }
         return users;
     }
@@ -66,7 +66,7 @@ public class UserDAOimpl implements UserDAO {
                 userFromResultSet(user, st);
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select by id.",e);
+            throw new DataObjectException(e);
         }
         return user;
     }
@@ -80,7 +80,7 @@ public class UserDAOimpl implements UserDAO {
                 result = pr.execute();
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In delete.", e);
+            throw new DataObjectException(e);
         }
         return result;
     }
@@ -115,7 +115,7 @@ public class UserDAOimpl implements UserDAO {
                 pr.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In update.", e);
+            throw new DataObjectException(e);
         }
     }
 
@@ -134,7 +134,7 @@ public class UserDAOimpl implements UserDAO {
             }
         } catch (SQLException e) {
             logger.error(e);
-            throw new DataObjectException("In select by log and pass.",e);
+            throw new DataObjectException(e);
         }
         return user;
     }

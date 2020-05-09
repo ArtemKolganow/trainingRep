@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
-public class CraftOrder implements ToSell, Comparable<CraftOrder>, Entity, Serializable {
+public class CraftOrder implements Comparable<CraftOrder>, Entity, Serializable {
     private int id;
     private int userId;
     private String title;
@@ -62,7 +62,6 @@ public class CraftOrder implements ToSell, Comparable<CraftOrder>, Entity, Seria
         this.userId = userId;
     }
 
-    @Override
     public int getId() {
         return id;
     }

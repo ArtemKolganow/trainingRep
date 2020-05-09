@@ -37,7 +37,7 @@ public class UserInfoDAOimpl implements UserInfoDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select all.",e);
+            throw new DataObjectException(e);
         }
         return users;
     }
@@ -51,7 +51,7 @@ public class UserInfoDAOimpl implements UserInfoDAO {
                 result = pr.execute();
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In delete.", e);
+            throw new DataObjectException(e);
         }
         return result;
     }
@@ -68,7 +68,7 @@ public class UserInfoDAOimpl implements UserInfoDAO {
                 result = pr.execute();
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In create.", e);
+            throw new DataObjectException(e);
         }
         return result;
     }
@@ -84,7 +84,7 @@ public class UserInfoDAOimpl implements UserInfoDAO {
                 pr.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In update.", e);
+            throw new DataObjectException(e);
         }
     }
 
@@ -114,7 +114,7 @@ public class UserInfoDAOimpl implements UserInfoDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select by id.",e);
+            throw new DataObjectException(e);
         }
         return user;
     }

@@ -1,6 +1,7 @@
 package by.training.finalproject.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,15 +11,15 @@ public class User implements Comparable<User>, Serializable, Entity {
     private String pass;
     private String email;
     private Integer role;
-    private List<Order> orders;
+    private Order order ;
     private UserInfo userInfo;
 
-    public List<Order> getOrders() {
-        return orders;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setOrder(Order orders) {
+        this.order = orders;
     }
 
     public int getId() {
@@ -69,7 +70,7 @@ public class User implements Comparable<User>, Serializable, Entity {
                 ", pass='" + pass + '\'' +
                 ", email='" + email + '\'' +
                 ", role=" + role +
-                ", orders=" + orders +
+                ", order=" + order +
                 ", userInfo=" + userInfo +
                 '}';
     }
@@ -84,13 +85,13 @@ public class User implements Comparable<User>, Serializable, Entity {
                 Objects.equals(pass, user.pass) &&
                 Objects.equals(email, user.email) &&
                 Objects.equals(role, user.role) &&
-                Objects.equals(orders, user.orders) &&
+                Objects.equals(order, user.order) &&
                 Objects.equals(userInfo, user.userInfo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, pass, email, role, orders, userInfo);
+        return Objects.hash(id, login, pass, email, role, order, userInfo);
     }
 
     public UserInfo getUserInfo() {

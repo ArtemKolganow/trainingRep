@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ProductService extends Service {
     List<Product> readAllProducts() throws ServiceException;
+    Product readByID(Integer id) throws ServiceException;
 }

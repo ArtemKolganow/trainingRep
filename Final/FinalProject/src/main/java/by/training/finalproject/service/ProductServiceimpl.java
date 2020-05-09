@@ -25,7 +25,34 @@ public class ProductServiceimpl implements ProductService {
             try {
                 Transaction transaction = factory.createTransaction();
                 ProductDAO productDAO = (ProductDAO) transaction.createDao("ProductDAO");
-                return productDAO.findAll();
+                List<Product> list = productDAO.findAll();
+                transaction.commit();
+                return list;
+            } catch (DataObjectException e) {
+                throw new ServiceException(e);
+            } finally {
+                factory.close();
+            }
+        } catch (DataObjectException e) {
+            throw new ServiceException("Error in close.", e);
+        }
+    }
+
+    @Override
+    public Product readByID(Integer id) throws ServiceException {
+        TransactionFactory factory = null;
+        try {
+            factory = new TrasactionFactoryimpl();
+        } catch (DataObjectException e) {
+            throw new ServiceException("Error in Transaction factory init.", e);
+        }
+        try {
+            try {
+                Transaction transaction = factory.createTransaction();
+                ProductDAO productDAO = (ProductDAO) transaction.createDao("ProductDAO");
+                Product product = productDAO.findEntityById(id);
+                transaction.commit();
+                return product;
             } catch (DataObjectException e) {
                 throw new ServiceException(e);
             } finally {

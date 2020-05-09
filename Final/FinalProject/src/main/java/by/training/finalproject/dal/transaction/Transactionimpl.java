@@ -19,7 +19,6 @@ public class Transactionimpl implements Transaction {
         classes.put("OrderDAO", new OrderDAOimpl());
         classes.put("UserInfoDAO", new UserInfoDAOimpl());
         classes.put("RegisteredProductDAO", new RegisteredProductDAOimpl());
-        classes.put("SaleDAO", new SaleDAOimpl());
         classes.put("CraftOrderDAO", new CraftOrderDAOimpl());
     }
 

@@ -2,12 +2,18 @@ package by.training.finalproject.controller;
 
 public enum CommandName {
     LOGIN,
-    TOLOGINPAGE,
+    TO_LOGIN_PAGE,
     MAIN,
     LOGOUT,
-    TOREGISTRATIONPAGE,
+    TO_REGISTRATION_PAGE,
     REGISTRATION,
     PROFILE,
-    ORDERLIST,
+    ORDER_LIST,
+    USER_LIST,
+    CRAFT_ORDER_LIST,
+    EDIT_PROFILE,
+    TO_ORDER,
+    BASKET,
+    CONFIRM_ORDER,
     WRONG
 }

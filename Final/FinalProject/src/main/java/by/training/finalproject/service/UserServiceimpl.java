@@ -18,11 +18,29 @@ public class UserServiceimpl implements UserService {
 
     @Override
     public List<User> readAllUsers() throws ServiceException {
-        UserDAOimpl dao = new UserDAOimpl();
+
+        TransactionFactory factory = null;
         try {
-            return dao.findAll();
+            factory =  new TrasactionFactoryimpl();
         } catch (DataObjectException e) {
-            throw new ServiceException(e);
+            throw new ServiceException("Error in Transaction factory init.",e);
+        }
+
+        try {
+            try {
+                logger.info("Come to service user.");
+                Transaction transaction = factory.createTransaction();
+                UserDAO dao = (UserDAO) transaction.createDao("UserDAO");
+                List<User> users = dao.findAll();
+                transaction.commit();
+                return users;
+            } catch (DataObjectException e) {
+                throw new ServiceException(e);
+            } finally {
+                factory.close();
+            }
+        } catch (DataObjectException e) {
+            throw new ServiceException("Error in close.",e);
         }
     }
 

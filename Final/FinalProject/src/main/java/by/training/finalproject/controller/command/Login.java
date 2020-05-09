@@ -3,10 +3,7 @@ package by.training.finalproject.controller.command;
 import by.training.finalproject.controller.CommandProvider;
 import by.training.finalproject.controller.Forward;
 import by.training.finalproject.entity.User;
-import by.training.finalproject.service.ProductService;
-import by.training.finalproject.service.ServiceException;
-import by.training.finalproject.service.ServiceFactory;
-import by.training.finalproject.service.UserService;
+import by.training.finalproject.service.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,6 +27,8 @@ public class Login implements Command {
             User user = service.findByLoginAndPass(login,pass);
             Forward forward = new Forward();
             if(user.getLogin()!=null){
+                OrderService orderService = (OrderService) factory.getService("Order");
+                user.setOrder(orderService.readCompilationOrderByUserId(user.getId()));
                 HttpSession session = request.getSession();
                 session.setAttribute("authorizedUser", user);
                 ProductService productService = (ProductService) factory.getService("Product");

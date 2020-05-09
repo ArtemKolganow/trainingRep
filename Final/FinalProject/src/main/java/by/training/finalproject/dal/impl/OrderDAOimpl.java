@@ -19,9 +19,10 @@ public class OrderDAOimpl implements OrderDAO {
     private Connection cn;
     private static final String SQL_SELECT_ALL_ORDERS = "SELECT * FROM workshopdb.order";
     private static final String SQL_SELECT_ORDER_BY_ID = "SELECT * FROM workshopdb.order WHERE id=?";
-    private static final String SQL_SELECT_ORDER_BY_USER_ID = "SELECT * FROM workshopdb.order WHERE id=?";
+    private static final String SQL_SELECT_ORDER_BY_USER_ID = "SELECT * FROM workshopdb.order WHERE `order`.user_id=?";
+    private static final String SQL_SELECT_ORDER_BY_USER_ID_AND_STATUS = "SELECT * FROM workshopdb.order WHERE user_id=? AND status=?";
     private static final String SQL_DELETE_ORDER_BY_ID = "DELETE FROM workshopdb.order WHERE id=?";
-    private static final String SQL_INSERT_ORDER = "INSERT INTO workshopdb.order (id, user_id, status, date, deliverydate, price) VALUES (?,?,?,?,?,?)";
+    private static final String SQL_INSERT_ORDER = "INSERT INTO workshopdb.order ( user_id, status, date, deliverydate, price) VALUES (?,?,?,?,?)";
     private static final String SQL_UPDATE_ORDER = "UPDATE workshopdb.order SET  status=?, date=?, deliverydate=?, price=? WHERE `id`=?";
 
 
@@ -42,7 +43,7 @@ public class OrderDAOimpl implements OrderDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select all.",e);
+            throw new DataObjectException(e);
         }
         return orders;
     }
@@ -63,15 +64,16 @@ public class OrderDAOimpl implements OrderDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select by id.",e);
+            throw new DataObjectException(e);
         }
         return order;
     }
 
     private void orderFromResultSet(Order order, ResultSet resultSet) throws SQLException {
+        logger.info(resultSet.getInt("id"));
         order.setId(resultSet.getInt("id"));
         order.setUserId(resultSet.getInt("user_id"));
-        order.setStatus(Status.valueOf(resultSet.getString("status")));
+        order.setStatus(Status.valueOf(resultSet.getString("status").toUpperCase()));
         order.setDate(LocalDate.parse(resultSet.getString("date")));
         order.setDeliveryDate(LocalDate.parse(resultSet.getString("deliverydate")));
         order.setPrice(resultSet.getDouble("price"));
@@ -96,9 +98,31 @@ public class OrderDAOimpl implements OrderDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select by id.",e);
+            throw new DataObjectException(e);
         }
         return orders;
+    }
+
+    @Override
+    public Order findCompilationOrderByUserId(Integer id, String status) throws DataObjectException {
+        Order order = new Order();
+        try {
+            RegisteredProductDAO registeredProductDAO = new RegisteredProductDAOimpl();
+            registeredProductDAO.setCn(cn);
+            try(PreparedStatement st = cn.prepareStatement(SQL_SELECT_ORDER_BY_USER_ID_AND_STATUS)){
+                st.setString(1, id.toString());
+                st.setString(2, status);
+                try (ResultSet resultSet = st.executeQuery()) {
+                    while (resultSet.next()) {
+                        orderFromResultSet(order, resultSet);
+                        order.setProductList(registeredProductDAO.findEntityById(resultSet.getInt("id")));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new DataObjectException(e);
+        }
+        return order;
     }
 
     @Override
@@ -110,7 +134,7 @@ public class OrderDAOimpl implements OrderDAO {
                 result = pr.execute();
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In delete.", e);
+            throw new DataObjectException(e);
         }
         return result;
     }
@@ -120,12 +144,11 @@ public class OrderDAOimpl implements OrderDAO {
         boolean result;
         try{
             try(PreparedStatement pr = cn.prepareStatement(SQL_INSERT_ORDER)){
-                pr.setString(1,String.valueOf(entity.getId()));
-                pr.setString(2,String.valueOf(entity.getUserId()));
-                pr.setString(3,entity.getStatus().getValue());
-                pr.setString(4,entity.getDate().toString());
-                pr.setString(5,entity.getDeliveryDate().toString());
-                pr.setString(6,String.valueOf(entity.getPrice()));
+                pr.setString(1,String.valueOf(entity.getUserId()));
+                pr.setString(2,entity.getStatus().getValue());
+                pr.setString(3,entity.getDate().toString());
+                pr.setString(4,entity.getDeliveryDate().toString());
+                pr.setString(5,String.valueOf(entity.getPrice()));
                 result = pr.execute();
             }
             RegisteredProductDAO registeredProductDAO = new RegisteredProductDAOimpl();
@@ -134,7 +157,7 @@ public class OrderDAOimpl implements OrderDAO {
                 registeredProductDAO.create(registeredProduct);
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In create.", e);
+            throw new DataObjectException(e);
         }
         return result;
     }
@@ -152,7 +175,7 @@ public class OrderDAOimpl implements OrderDAO {
                 pr.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In update.", e);
+            throw new DataObjectException(e);
         }
     }
 

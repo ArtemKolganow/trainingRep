@@ -30,6 +30,7 @@
 <c:url value="/SignIn.html" var="signInURL"/>
 <c:url value="/ToRegistration.html" var="ToRegistrationURL"/>
 <c:url value="/LogOut.html" var="logOunURL"/>
+<c:url value="/Basket.html" var="basketURL"/>
 <c:url value="/EditProfile.html" var="editURL"/>
 <c:url value="/toOrderList.html" var="orderListURL"/>
 <c:url value="/toCraftOrderList.html" var="craftOrderListURL"/>
@@ -38,7 +39,13 @@
 <c:url value="/toUserList.html" var="toUserListURL"/>
 <nav class="navbar navbar-light" style="background-color: #CFCFDF">
     <a class="navbar-brand" href="${pageContext.request.contextPath}/">WorkShop</a>
-
+    <form class="form-inline">
+        <a class="btn form-control btn-sm align-middle btn-outline-secondary" href="${basketURL}">Basket</a>
+        <c:if test="${authorizedUser.login != null}">
+            Hello: ${authorizedUser.login}
+            <a class="btn form-control btn-sm align-middle btn-outline-secondary" href="${logOunURL}">Log out</a>
+        </c:if>
+    </form>
 </nav>
 Login: ${authorizedUser.login}.<br>
 Email: ${authorizedUser.email}.<br>
@@ -63,6 +70,7 @@ Role:
 <c:if test="${authorizedUser.role == 2}">
     Admin.<br>
     <a class="btn form-control btn-sm align-middle btn-outline-secondary" href="${toUserListURL}">To user list.</a><br>
+    <a class="btn form-control btn-sm align-middle btn-outline-secondary" href="${orderListURL}">To order list.</a><br>
 
 </c:if>
 <br>

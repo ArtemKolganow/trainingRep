@@ -21,13 +21,19 @@ public class CommandFilter implements Filter {
 
     static {
         commandMap.put("/login", "LOGIN");
-        commandMap.put("/SignIn", "TOLOGINPAGE");
+        commandMap.put("/SignIn", "TO_LOGIN_PAGE");
         commandMap.put("/", "MAIN");
         commandMap.put("/LogOut","LOGOUT");
-        commandMap.put("/ToRegistration","TOREGISTRATIONPAGE");
+        commandMap.put("/ToRegistration","TO_REGISTRATION_PAGE");
         commandMap.put("/registration","REGISTRATION");
         commandMap.put("/profile","PROFILE");
-        commandMap.put("/toOrderList","ORDERLIST");
+        commandMap.put("/toOrderList","ORDER_LIST");
+        commandMap.put("/toUserList","USER_LIST");
+        commandMap.put("/toCraftOrderList","CRAFT_ORDER_LIST");
+        commandMap.put("/EditProfile","EDIT_PROFILE");
+        commandMap.put("/ToOrder","TO_ORDER");
+        commandMap.put("/Basket","BASKET");
+        commandMap.put("/ConfirmOrder","CONFIRM_ORDER");
     }
 
     public void destroy() {

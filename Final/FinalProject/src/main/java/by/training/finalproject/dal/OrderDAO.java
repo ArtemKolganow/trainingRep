@@ -7,4 +7,5 @@ import java.util.List;
 public interface OrderDAO extends AbstractDAO<Integer, Order> {
     Order findEntityById(Integer id) throws DataObjectException;
     List<Order> findEntityByUserId(Integer id) throws DataObjectException;
+    Order findCompilationOrderByUserId(Integer id, String status) throws DataObjectException;
 }

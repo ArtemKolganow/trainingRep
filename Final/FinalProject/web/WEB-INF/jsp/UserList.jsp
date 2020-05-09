@@ -23,7 +23,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
             crossorigin="anonymous"></script>
-    <title>Order list</title>
+    <title>User list</title>
 </head>
 <body>
 <c:url value="/EditProfile.html" var="editURL"/>
@@ -40,7 +40,7 @@
 </nav>
 
 
-<jsp:useBean id="userList" scope="request" type="by.training.finalproject.entity.User"/>
+<jsp:useBean id="userList" scope="request" type="java.util.List"/>
 
 <table class="table">
     <thead>
@@ -61,7 +61,7 @@
             <td>${user.role}</td>
             <td><form action="${editURL}">
                 <input type="hidden" id="id" name="id" value="${user.id}">
-                <button class="btn form-control btn-sm align-middle btn-outline-secondary" type="submit">Go to order.</button>
+                <button class="btn form-control btn-sm align-middle btn-outline-secondary" type="submit">Edit user.</button>
             </form> </td>
         </tr>
     </c:forEach>

@@ -41,7 +41,7 @@ public class RegisteredProductDAOimpl implements RegisteredProductDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select by id.",e);
+            throw new DataObjectException(e);
         }
         return registeredProducts;
     }
@@ -55,7 +55,7 @@ public class RegisteredProductDAOimpl implements RegisteredProductDAO {
                 result = pr.execute();
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In delete.", e);
+            throw new DataObjectException( e);
         }
         return result;
     }
@@ -78,21 +78,15 @@ public class RegisteredProductDAOimpl implements RegisteredProductDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select all.",e);
+            throw new DataObjectException(e);
         }
         return registeredProducts;
     }
 
     private void readProduct(RegisteredProduct registeredProduct, int productId) throws DataObjectException {
-        if (productId < 1000000) {
             ProductDAO productDAO = new ProductDAOimpl();
             productDAO.setCn(cn);
             registeredProduct.setProduct(productDAO.findEntityById(productId));
-        } else {
-            CraftOrderDAO craftOrderDAO = new CraftOrderDAOimpl();
-            craftOrderDAO.setCn(cn);
-            registeredProduct.setProduct(craftOrderDAO.findEntityById(productId));
-        }
     }
 
     @Override
@@ -105,7 +99,7 @@ public class RegisteredProductDAOimpl implements RegisteredProductDAO {
                 result = pr.execute();
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In delete.", e);
+            throw new DataObjectException( e);
         }
         return result;
     }
@@ -121,7 +115,7 @@ public class RegisteredProductDAOimpl implements RegisteredProductDAO {
                 result = pr.execute();
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In create.", e);
+            throw new DataObjectException(e);
         }
         return result;
     }
@@ -137,7 +131,7 @@ public class RegisteredProductDAOimpl implements RegisteredProductDAO {
                 pr.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In update.", e);
+            throw new DataObjectException(e);
         }
     }
 

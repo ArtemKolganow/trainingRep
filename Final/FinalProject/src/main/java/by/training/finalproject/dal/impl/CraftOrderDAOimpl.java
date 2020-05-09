@@ -17,8 +17,9 @@ public class CraftOrderDAOimpl implements CraftOrderDAO {
     private Connection cn;
     private static final String SQL_SELECT_ALL_CRAFTORDERS = "SELECT * FROM workshopdb.craftorder";
     private static final String SQL_SELECT_CRAFTORDER_BY_ID = "SELECT * FROM workshopdb.craftorder WHERE id=?";
+    private static final String SQL_SELECT_CRAFTORDER_BY_USER_ID = "SELECT * FROM workshopdb.craftorder WHERE user_id=?";
     private static final String SQL_DELETE_CRAFTORDER_BY_ID = "DELETE FROM workshopdb.craftorder WHERE id=?";
-    private static final String SQL_INSERT_CRAFTORDER = "INSERT INTO workshopdb.craftorder (id, user_id, title, orderDescription, date, state, price) VALUES (?,?,?,?,?,?,?)";
+    private static final String SQL_INSERT_CRAFTORDER = "INSERT INTO workshopdb.craftorder ( user_id, title, orderDescription, date, state, price) VALUES (?,?,?,?,?,?)";
     private static final String SQL_UPDATE_CRAFTORDER = "UPDATE workshopdb.craftorder SET user_id=?, title=?, orderDescription=?, date=?, state=?, price=? WHERE `id`=?";
 
     @Override
@@ -42,7 +43,7 @@ public class CraftOrderDAOimpl implements CraftOrderDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select all.",e);
+            throw new DataObjectException(e);
         }
         return craftOrders;
     }
@@ -56,7 +57,7 @@ public class CraftOrderDAOimpl implements CraftOrderDAO {
                 result = pr.execute();
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In delete.", e);
+            throw new DataObjectException( e);
         }
         return result;
     }
@@ -66,17 +67,16 @@ public class CraftOrderDAOimpl implements CraftOrderDAO {
         boolean result;
         try{
             try(PreparedStatement pr = cn.prepareStatement(SQL_INSERT_CRAFTORDER)){
-                pr.setString(1,String.valueOf(entity.getId()));
-                pr.setString(2,String.valueOf(entity.getUserId()));
-                pr.setString(3,entity.getTitle());
-                pr.setString(4,entity.getOrderDescription());
-                pr.setString(5,entity.getDate().toString());
-                pr.setString(6,entity.getState().getValue());
-                pr.setString(7,String.valueOf(entity.getPrice()));
+                pr.setString(1,String.valueOf(entity.getUserId()));
+                pr.setString(2,entity.getTitle());
+                pr.setString(3,entity.getOrderDescription());
+                pr.setString(4,entity.getDate().toString());
+                pr.setString(5,entity.getState().getValue());
+                pr.setString(6,String.valueOf(entity.getPrice()));
                 result = pr.execute();
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In create.", e);
+            throw new DataObjectException(e);
         }
         return result;
     }
@@ -95,7 +95,7 @@ public class CraftOrderDAOimpl implements CraftOrderDAO {
                 pr.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In update.", e);
+            throw new DataObjectException(e);
         }
     }
 
@@ -128,8 +128,34 @@ public class CraftOrderDAOimpl implements CraftOrderDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select by id.",e);
+            throw new DataObjectException(e);
         }
         return craftOrder;
+    }
+
+    @Override
+    public List<CraftOrder> findEntityByUserId(Integer id) throws DataObjectException {
+        List<CraftOrder> craftOrders = new ArrayList<>();
+        try {
+            try(PreparedStatement st = cn.prepareStatement(SQL_SELECT_CRAFTORDER_BY_USER_ID)) {
+                st.setString(1, id.toString());
+                try (ResultSet resultSet = st.executeQuery()) {
+                    while (resultSet.next()) {
+                        CraftOrder craftOrder = new CraftOrder();
+                        craftOrder.setId(resultSet.getInt("id"));
+                        craftOrder.setUserId(resultSet.getInt("user_id"));
+                        craftOrder.setTitle(resultSet.getString("title"));
+                        craftOrder.setOrderDescription(resultSet.getString("orderDescription"));
+                        craftOrder.setDate(LocalDate.parse(resultSet.getString("date")));
+                        craftOrder.setState(State.valueOf(resultSet.getString("state")));
+                        craftOrder.setPrice(resultSet.getDouble("price"));
+                        craftOrders.add(craftOrder);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new DataObjectException(e);
+        }
+        return craftOrders;
     }
 }

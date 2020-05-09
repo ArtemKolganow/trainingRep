@@ -2,7 +2,6 @@ package by.training.finalproject.dal.impl;
 
 import by.training.finalproject.dal.DataObjectException;
 import by.training.finalproject.dal.ProductDAO;
-import by.training.finalproject.dal.SaleDAO;
 import by.training.finalproject.entity.Product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,7 +19,7 @@ public class ProductDAOimpl implements ProductDAO {
     private static final String SQL_SELECT_PRODUCT_BY_ID = "SELECT product.id, type.type, product.name, product.price, product.weight, product.img" +
             " FROM (workshopdb.product INNER JOIN workshopdb.type ON product.type_id = type.id) WHERE product.id=?";
     private static final String SQL_DELETE_PRODUCT_BY_ID = "DELETE FROM workshopdb.product WHERE id=?";
-    private static final String SQL_INSERT_PRODUCT = "INSERT INTO workshopdb.product(id, type_id, name, price, weight, img) VALUES (?,?,?,?,?,?)";
+    private static final String SQL_INSERT_PRODUCT = "INSERT INTO workshopdb.product( type_id, name, price, weight, img) VALUES (?,?,?,?,?)";
     private static final String SQL_UPDATE_PRODUCT = "UPDATE workshopdb.product SET `type_id`=?,`name`=?,`price`=?,`weight`=?,`img`=? WHERE `id`=?";
     private static final String SQL_SELECT_TYPE_TO_ID = "SELECT id FROM workshopdb.type WHERE type=?";
     private static final String SQL_SELECT_ID_TO_TYPE = "SELECT type FROM workshopdb.type WHERE id=?";
@@ -44,7 +43,7 @@ public class ProductDAOimpl implements ProductDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select all.",e);
+            throw new DataObjectException(e);
         }
         return products;
     }
@@ -62,7 +61,7 @@ public class ProductDAOimpl implements ProductDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select by id.",e);
+            throw new DataObjectException(e);
         }
         return product;
     }
@@ -89,13 +88,8 @@ public class ProductDAOimpl implements ProductDAO {
                 try(PreparedStatement pr = cn.prepareStatement(SQL_DELETE_MATERIAL_LIST_BY_ID)){
                     pr.setString(1,String.valueOf(entity.getId()));
                 }
-            if(!entity.getSale().getSaleValue().equals(1.0)) {
-                SaleDAO saleDAO = new SaleDAOimpl();
-                saleDAO.setCn(cn);
-                saleDAO.delete(entity.getSale());
-            }
         } catch (SQLException e) {
-            throw new DataObjectException("In delete.", e);
+            throw new DataObjectException( e);
         }
         return result;
     }
@@ -106,12 +100,11 @@ public class ProductDAOimpl implements ProductDAO {
 
         try{
             try(PreparedStatement pr = cn.prepareStatement(SQL_INSERT_PRODUCT)){
-                pr.setString(1,String.valueOf(entity.getId()));
-                pr.setString(2,String.valueOf(getTypeId(entity.getType())));
-                pr.setString(3,entity.getName());
-                pr.setString(4,String.valueOf(entity.getPrice()));
-                pr.setString(5,String.valueOf(entity.getWeight()));
-                pr.setString(6,entity.getImage());
+                pr.setString(1,String.valueOf(getTypeId(entity.getType())));
+                pr.setString(2,entity.getName());
+                pr.setString(3,String.valueOf(entity.getPrice()));
+                pr.setString(4,String.valueOf(entity.getWeight()));
+                pr.setString(5,entity.getImage());
                 result = pr.execute();
             }
             for(int i = 0; i<entity.getMaterials().size();i++){
@@ -120,13 +113,8 @@ public class ProductDAOimpl implements ProductDAO {
                     pr.setString(2,String.valueOf(entity.getId()));
                 }
             }
-            if(!entity.getSale().getSaleValue().equals(1.0)) {
-                SaleDAO saleDAO = new SaleDAOimpl();
-                saleDAO.setCn(cn);
-                saleDAO.create(entity.getSale());
-            }
         } catch (SQLException e) {
-            throw new DataObjectException("In create.", e);
+            throw new DataObjectException(e);
         }
         return result;
     }
@@ -144,7 +132,7 @@ public class ProductDAOimpl implements ProductDAO {
                 pr.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In update.", e);
+            throw new DataObjectException(e);
         }
     }
 
@@ -168,7 +156,7 @@ public class ProductDAOimpl implements ProductDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select type.",e);
+            throw new DataObjectException(e);
         }
     }
 
@@ -182,7 +170,7 @@ public class ProductDAOimpl implements ProductDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select type.",e);
+            throw new DataObjectException(e);
         }
     }
 
@@ -196,7 +184,7 @@ public class ProductDAOimpl implements ProductDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select type.",e);
+            throw new DataObjectException(e);
         }
     }
 
@@ -210,7 +198,7 @@ public class ProductDAOimpl implements ProductDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select type.",e);
+            throw new DataObjectException(e);
         }
     }
 
@@ -226,7 +214,7 @@ public class ProductDAOimpl implements ProductDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new DataObjectException("In select materials by id.",e);
+            throw new DataObjectException(e);
         }
         return materials;
     }

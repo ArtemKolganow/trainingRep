@@ -2,6 +2,7 @@ package by.training.finalproject.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +14,12 @@ public class Order implements Comparable<Order>, Entity, Serializable {
     private LocalDate date;
     private LocalDate deliveryDate;
     private double price;
-    private List<RegisteredProduct> productList;
+    private List<RegisteredProduct> productList = new ArrayList<>();
+    private CraftOrder craftOrder;
+
+    public void addProductToOrder(RegisteredProduct registeredProduct){
+        productList.add(registeredProduct);
+    }
 
     public List<RegisteredProduct> getProductList() {
         return productList;
@@ -71,6 +77,14 @@ public class Order implements Comparable<Order>, Entity, Serializable {
         this.userId = userId;
     }
 
+    public CraftOrder getCraftOrder() {
+        return craftOrder;
+    }
+
+    public void setCraftOrder(CraftOrder craftOrder) {
+        this.craftOrder = craftOrder;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,12 +96,13 @@ public class Order implements Comparable<Order>, Entity, Serializable {
                 status == order.status &&
                 Objects.equals(date, order.date) &&
                 Objects.equals(deliveryDate, order.deliveryDate) &&
-                Objects.equals(productList, order.productList);
+                Objects.equals(productList, order.productList) &&
+                Objects.equals(craftOrder, order.craftOrder);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, status, date, deliveryDate, price, productList);
+        return Objects.hash(id, userId, status, date, deliveryDate, price, productList, craftOrder);
     }
 
     @Override
@@ -100,6 +115,7 @@ public class Order implements Comparable<Order>, Entity, Serializable {
                 ", deliveryDate=" + deliveryDate +
                 ", price=" + price +
                 ", productList=" + productList +
+                ", craftOrder=" + craftOrder +
                 '}';
     }
 

@@ -24,7 +24,7 @@ public class OrderList implements Command {
             if (user != null) {
                 OrderService orderService = (OrderService) factory.getService("Order");
                 request.setAttribute("orderList", orderService.readOrdersByUserId(user.getId()));
-                Forward forward = new Forward(false, "WEB-INF/jsp/Profile.jsp");
+                Forward forward = new Forward(false, "WEB-INF/jsp/OrderList.jsp");
                 forward.forward(request, response);
             } else {
                 Forward forward = new Forward(false, "WEB-INF/jsp/SignIn.jsp");

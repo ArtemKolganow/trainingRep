@@ -11,6 +11,8 @@ public class ServiceFactory {
         SERVICES.put("Product", new ProductServiceimpl());
         SERVICES.put("UserInfo", new UserInfoServiceimpl());
         SERVICES.put("Order", new OrderServiceimpl());
+        SERVICES.put("CraftOrder", new CraftOrderServiceimpl());
+        SERVICES.put("RegisteredProduct", new RegisteredProductServiceimpl());
     }
 
     public Service getService(String key) throws ServiceException {

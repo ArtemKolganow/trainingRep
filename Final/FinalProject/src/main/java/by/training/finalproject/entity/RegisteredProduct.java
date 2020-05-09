@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class RegisteredProduct implements Entity, Serializable {
     private int orderId;
-    private ToSell product;
+    private Product product;
     private int quantity;
 
     @Override
@@ -40,11 +40,11 @@ public class RegisteredProduct implements Entity, Serializable {
         this.orderId = orderId;
     }
 
-    public ToSell getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(ToSell product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 

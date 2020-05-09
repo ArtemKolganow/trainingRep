@@ -32,11 +32,14 @@
 <jsp:useBean id="authorizedUser" scope="session" class="by.training.finalproject.entity.User"/>
 <c:url value="/SignIn.html" var="signInURL"/>
 <c:url value="/LogOut.html" var="logOunURL"/>
+<c:url value="/Basket.html" var="basketURL"/>
 <c:url value="/profile.html" var="profileURL"/>
+<c:url value="/ToOrder.html" var="orderURL"/>
 <c:url value="/ToRegistration.html" var="ToRegistrationURL"/>
 <nav class="navbar navbar-light" style="background-color: #CFCFDF">
     <a class="navbar-brand" href="${pageContext.request.contextPath}/">WorkShop</a>
     <form class="form-inline">
+        <a class="btn form-control btn-sm align-middle btn-outline-secondary" href="${basketURL}">Basket</a>
         <c:if test="${authorizedUser.login == null}">
             <a class="btn form-control btn-sm align-middle btn-outline-secondary" href="${ToRegistrationURL}">Registration</a>
             <a class="btn form-control btn-sm align-middle btn-outline-secondary" href="${signInURL}"> Sign In</a>
@@ -48,17 +51,24 @@
     </form>
 </nav>
 <jsp:useBean id="productList" scope="request" type="java.util.List"/>
-<div class="container">
+<div class="container mt-5">
     <div class="row row-cols-1 row-cols-md-3">
     <c:forEach var="product" items="${productList}">
         <div class="col mb-4">
-        <div class="card h-100" style="width: 18rem; margin: 20px auto auto;">
+        <div class="card h-100">
             <c:url value="${product.image}" var="img"/>
-            <img class="img-fluid" src="${img}" alt="NO IMAGE">
+            <img class="img-fluid" style="max-height: 250px" src="${img}" alt="NO IMAGE">
             <div class="card-body  d-flex flex-column">
                 <h5 class="card-title">${product.name}</h5>
                 <p class="card-text">Type: ${product.type}<br> Price: ${product.price}</p>
-                <a href="#" class="btn form-control btn-sm align-middle btn-outline-secondary align-self-end" style="margin-top: auto">To order</a>
+                <div class="card-footer"  style="margin-top: auto">
+                    <form action="${orderURL}">
+                        <input type="hidden" id="id" name="id" value="${product.id}">
+                        <label for="quantity"></label><input type="number" style="max-width: 100%" min="0" step="1" id="quantity" name="quantity" value="1">
+                        <button class="btn form-control btn-sm align-middle btn-outline-secondary" type="submit">To order.</button>
+                    </form>
+                </div>
+
             </div>
         </div>
       </div>

@@ -23,24 +23,26 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
             crossorigin="anonymous"></script>
-    <title>Order list</title>
+    <title>Craft Order list</title>
 </head>
 <body>
 <c:url value="/CraftOrderView.html" var="craftOrderURL"/>
 <jsp:useBean id="authorizedUser" scope="session" class="by.training.finalproject.entity.User"/>
 <c:url value="/LogOut.html" var="logOunURL"/>
+<c:url value="/Basket.html" var="basketURL"/>
 <c:url value="/profile.html" var="profileURL"/>
 
 <nav class="navbar navbar-light" style="background-color: #CFCFDF">
     <a class="navbar-brand" href="${pageContext.request.contextPath}/">WorkShop</a>
     <form class="form-inline">
+        <a class="btn form-control btn-sm align-middle btn-outline-secondary" href="${basketURL}">Basket</a>
         Hello:  <a href="${profileURL}">${authorizedUser.login}</a>
         <a class="btn form-control btn-sm align-middle btn-outline-secondary" href="${logOunURL}">Log out</a>
     </form>
 </nav>
 
 
-<jsp:useBean id="craftOrderList" scope="request" type="by.training.finalproject.entity.CraftOrder"/>
+<jsp:useBean id="craftOrderList" scope="request" type="java.util.List"/>
 
 <table class="table">
     <thead>
